@@ -1,0 +1,188 @@
+/* svg {
+    width : 100%;
+    height : auto
+}
+
+.top {
+    position : fixed;
+    top : 0;
+    left : 0;
+}
+
+.app {
+    display : grid;
+    grid-template-columns: 1fr;
+    grid-template-rows : 1fr;
+} */
+
+.top {
+    position : fixed;
+    top : 0;
+    left : 0;
+    width : 100%;
+    height : auto;
+}
+
+/* body */
+
+html {
+    background : #3aacaf;
+    width : 100%;
+    height : 100%;
+    top : 0; 
+    left : 0;
+    margin : 0;
+    padding : 0;
+    position : fixed;
+    overflow-y : scroll;
+
+
+}
+
+body {
+    color : #ffffff;
+    margin : 5%;
+    max-width : 1150px;
+
+    display: block;
+    padding-left : 20px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+/* headers */
+
+h1 {
+    font-family : 'Yeseva One';
+    font-weight : normal;
+    font-size : 42px;
+    padding-top : 2%;
+    padding-bottom : 2%;
+
+    text-align : center;
+}
+
+h3 {
+    font-family : 'Yeseva One';
+    font-weight : normal;
+    font-size : 28px;
+
+    margin-top : 60px
+
+}
+
+/* text */
+
+p {
+    font-family : 'Open Sans'
+}
+
+#intro {
+    font-family : 'Open Sans';
+    margin-left : 2%;
+    /* width : 50% */
+}
+
+/* arrange stuff */
+
+.row {
+    display : grid;
+    /* width : minmax(200px, 1280px); */
+    grid-template-rows : 1fr;
+}
+
+button {
+    background-color: white;
+    outline : none;
+    border : white;
+
+    font-family : 'Open Sans'
+}
+
+.center {
+    display : grid;
+    grid-template-columns : 1fr;
+    grid-template-rows : 1fr;
+
+    padding-top : 30px;
+
+    text-align : center;
+    
+}
+
+/* a bit about me */
+
+.one {
+    grid-template-columns : 2fr 2fr; 
+
+}
+
+.selfie {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width : 250px;
+    height : 250px;
+}
+
+/* my projects */
+
+.two {
+    grid-template-columns : 3fr 3fr 3fr; 
+
+}
+
+.project {
+    height : 250px;
+    width : 250px;
+    border-radius : 10%;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.more {
+    width : 150px;
+    height : 50px;
+    border-radius : 10px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*my experience*/
+
+.experience {
+    display : grid;
+    grid-template-columns : 2fr 2fr;
+    grid-template-rows : 1fr;
+}
+
+.column {
+    display : grid;
+    grid-template-columns : 1fr;
+    grid-template-rows : 3fr 3fr 3fr;
+}
+
+.job {
+    width : 250px;
+    height : 75px;
+    border-radius : 20px;
+
+    margin : 10px;
+}
+
+#jobexplanations {
+    text-align : right;
+    margin-top : 5px;
+
+    margin-right : 20%; /* TO DO*/
+
+}
+
+.end {
+    margin-top : 100px
+}
