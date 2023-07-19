@@ -1,5 +1,6 @@
 // import { svgns } from "../api"
 import { gsap } from "gsap";
+import { ResumeComponent } from "../resume/resume.component";
 
 
 
@@ -9,6 +10,10 @@ export interface MainSetup {
       
     menu : HTMLElement,
     menuExit : HTMLElement,
+
+    gitBtn : HTMLElement,
+    resumeBtn1 : HTMLElement,
+    linkedInBtn1 : HTMLElement,
 }
 
 export class MainAPI {
@@ -19,6 +24,14 @@ export class MainAPI {
     menuBtn : HTMLElement
     menuExit : HTMLElement
 
+    gitBtn : HTMLElement
+    resumeBtn1 : HTMLElement
+    linkedInBtn1 : HTMLElement
+
+    gitURL : string = "https://github.com/leiah8"
+    linkedInURL : string = "https://www.linkedin.com/in/leiah-nay/"
+    resumeURL : string = './main.component.html'  // "./LeiahNay-Resume.pdf" //to do: show resume file open
+
     constructor(setup : MainSetup) {
         var self = this
         this.header = setup.header
@@ -26,10 +39,12 @@ export class MainAPI {
         this.menuBtn = setup.menu
         this.menuExit = setup.menuExit
 
+        this.gitBtn = setup.gitBtn
+        this.resumeBtn1 = setup.resumeBtn1
+        this.linkedInBtn1 = setup.linkedInBtn1
+
         this.init()
 
-
-        //add header back in 
         
 
     }
@@ -41,19 +56,28 @@ export class MainAPI {
 
     setupButtons() {
         var self = this
-        //to do : make the drop down acc drop down nicely
-        //to do : fix scrolling issue when mous is over the svg viewbox area
 
         gsap.set(self.dropdown, {visibility : "hidden"})
-        this.menuBtn.onpointerdown = function(e) {
+        this.menuBtn.onpointerdown = function() {
             console.log("hi")
             gsap.set(self.dropdown, {visibility : "visible"})
         }
 
-        this.menuExit.onpointerdown = function(e) {
+        this.menuExit.onpointerdown = function() {
             console.log("hello")
             gsap.set(self.dropdown, {visibility : "hidden"})
         }
+
+        this.gitBtn.onpointerdown = function() {
+            window.open(self.gitURL)
+        }
+
+        this.linkedInBtn1.onpointerdown = function() {
+            window.open(self.linkedInURL)
+        }
+
+       
+        
     }
 
 }

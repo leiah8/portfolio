@@ -1,15 +1,26 @@
+import {ActivatedRoute} from "@angular/router";
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-//import { HeroesComponent } from './heroes/heroes.component';
-import { MainComponent } from './main/main.component';
+import { Routes, RouterModule } from '@angular/router';
+import { ContainerComponent } from './container/container.component';
+import { MainComponent } from "./main/main.component";
+import { ResumeComponent } from "./resume/resume.component";
+import { ProjectsComponent } from "./projects/projects.component";
+import { MinecartComponent } from "./minecart/minecart.component";
 
 
 const routes: Routes = [
-  { path: '', component: MainComponent }
-];
+  { path: '', component: MainComponent },
+  { path: 'resume', component: ResumeComponent },
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'projects/minecart', component: MinecartComponent },
+  
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+}
+
+
