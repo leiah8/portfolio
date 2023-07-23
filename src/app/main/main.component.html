@@ -17,11 +17,15 @@
          </div>
 
          <div id="dropbtns">
-            <button #gitBtn class="dropbtn">GitHub</button>
+            <button #gitBtn class="dropbtn">
+               <a href="https://github.com/leiah8" target="_blank">GitHub</a>
+            </button>
             <button #resumeBtn1 class="dropbtn">
                 <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >Resume</a>
             </button>
-            <button #linkedInBtn1 class="dropbtn">LinkedIn</button>
+            <button #linkedInBtn1 class="dropbtn">
+               <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a>
+            </button>
          </div>
 
          <div class="leftdrop">
@@ -63,11 +67,9 @@
    </div>
 
    <div class="center">
-    <a routerLink="projects" routerLinkActive="active" ariaCurrentWhenActive="page">
         <button class="more">
-            See More
+         <a routerLink="projects" routerLinkActive="active" ariaCurrentWhenActive="page">See More</a>
         </button>
-    </a>
    </div>
 
 
@@ -77,26 +79,30 @@
    <h3> My Experience </h3>
 
    <div class="column">
-      <button class="job"> Job 1</button>
-      <button class="job"> Job 2</button>
-      <button class="job"> Job 3</button>
+      <button #jobBtn1 class="job"> Job 1</button>
+      <button #jobBtn2 class="job"> Job 2</button>
+      <button #jobBtn3 class="job"> Job 3</button>
    </div>
    </div>
 
    <div id="jobexplanations">
-      <h3> Job 1 </h3>
-      <p> Explanation 1 or Bullet points??</p>
+      <h3 #jobTitle id="jobTitle"> Job 1 </h3>
+      <p #jobP > Explanation 1 or Bullet points??</p>
    </div>
    </div>
 
-   <button class="more">My Resume</button>
+   <button class="more">
+      <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >My Resume</a>
+   </button>
 
    <h3 class="center"> Contact Me </h3>
 
    <div class="row two">
       <button class="more">Email</button>
       <button class="more">Phone Number</button>
-      <button class="more">LinkedIn</button>
+      <button class="more">
+         <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a>
+      </button>
    </div>
 
    <p class="center end">Designed and Built by Leiah Nay</p>

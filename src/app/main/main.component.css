@@ -62,7 +62,8 @@ h3 {
 /* text */
 
 p {
-    font-family : 'Open Sans'
+    font-family : 'Open Sans';
+    font-size : 100%;
 }
 
 #intro {
@@ -167,7 +168,7 @@ button {
 }
 
 #jobexplanations {
-    text-align : right;
+    text-align : left;
     margin-top : 5px;
 
     margin-right : 20%; /* TO DO*/
