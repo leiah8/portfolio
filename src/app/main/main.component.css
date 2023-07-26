@@ -13,7 +13,7 @@ a {
 /* body */
 
 html {
-    background : #3aacaf;
+    background : #196769;
     width : 100%;
     height : 100%;
     /* top : 0; 
@@ -118,10 +118,10 @@ button {
 
 /* my projects */
 
-.two {
+.three {
     grid-template-columns : 3fr 3fr 3fr; 
-
 }
+
 
 .project {
     /* height : 250px;
@@ -218,20 +218,20 @@ button {
 }
 
 .open {
-    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1688695202/portfolio/menu-btn_ivpidt.svg");
+    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/menu-btn_qoh4g8.svg");
 }
 
 /*drop down*/
 
 #dropdown {
     height :auto;
-    background-color : #489799;
+    background-color : #014345;
 
     grid-template-columns : 75% 25%;
 }
 
 .exit {
-    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1688695977/portfolio/exit-menu-btn_gwtoqo.svg");
+    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/exit-menu-btn_magazp.svg");
 }
 
 .leftdrop {
@@ -260,7 +260,7 @@ button {
     font-size : min(3vw, 28px);
 
     list-style : none;
-    color : #489799;
+    color : #196769;
 
     margin-top : 0;
 }

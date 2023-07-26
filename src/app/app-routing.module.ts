@@ -6,12 +6,14 @@ import { MainComponent } from "./main/main.component";
 import { ResumeComponent } from "./resume/resume.component";
 import { ProjectsComponent } from "./projects/projects.component";
 import { MinecartComponent } from "./minecart/minecart.component";
+import { ExperienceComponent } from "./experience/experience.component";
 
 
 const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'resume', component: ResumeComponent },
   { path: 'projects', component: ProjectsComponent },
+  { path: 'experience', component: ExperienceComponent },
   { path: 'projects/minecart', component: MinecartComponent },
   
 ]

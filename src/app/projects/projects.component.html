@@ -1,11 +1,52 @@
 <html>
     <link href='https://fonts.googleapis.com/css?family=Yeseva One' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+    <div>
+      <div #header id="header" class="top">
+         <img class="logo" src="https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/logo_l9hcho.svg" alt="LN Logo" width="50px" height="50px">
+         <button #menu class="menu open"> </button>
+      </div>
+
+      <div #dropdown id="dropdown" class="top">
+         <img class="logo" src="https://res.cloudinary.com/dqcldf509/image/upload/v1688696917/portfolio/big-logo_qst3yq.svg" alt="LN Logo" width="75px" height="75px">
+         
+         <div class="leftdrop">
+            <button #menuExit class="menu exit"> </button>
+         </div>
+
+         <div id="dropbtns">
+            <button class="dropbtn">
+               <a href="https://github.com/leiah8" target="_blank">GitHub</a>
+            </button>
+            <button class="dropbtn">
+                <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >Resume</a>
+            </button>
+            <button class="dropbtn">
+               <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a>
+            </button>
+         </div>
+
+         <div class="leftdrop">
+            <ul class="options">
+               <li>
+                  <a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">About</a>
+               </li>
+               <li>
+                  <a routerLink="projects" routerLinkActive="active" ariaCurrentWhenActive="page">Projects</a>
+               </li>
+               <li>Experience</li>
+               <li>Contact</li>
+            </ul>
+         </div>
+
+      </div>
+   </div>
     
 <body>
     <h1>My Projects</h1>
     <div id="container">
-    <ul>
+    <ul class="projectOptions">
         <li>
             <a routerLink="minecart" routerLinkActive="active" ariaCurrentWhenActive="page" >Minecart</a>
         </li>
@@ -15,8 +56,9 @@
         <li>Maze Solver</li>
     </ul>
     </div>
-    <a href="https://github.com/leiah8" target="_blank">
-        <button #gitBtn class="more">GitHub</button>
-    </a>
+    
+    <button class="more">
+        <a href="https://github.com/leiah8" target="_blank">GitHub</a>
+    </button>
 </body>
 </html>

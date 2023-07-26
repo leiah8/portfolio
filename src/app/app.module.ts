@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { ResumeComponent } from './resume/resume.component';
 import { MinecartComponent } from './minecart/minecart.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ExperienceComponent } from './experience/experience.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ProjectsComponent } from './projects/projects.component';
     ResumeComponent,
     MinecartComponent,
     ProjectsComponent,
+    ExperienceComponent,
   ],
   imports: [
     BrowserModule,

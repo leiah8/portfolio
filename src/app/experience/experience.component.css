@@ -2,6 +2,8 @@ html {
     background : #196769;
     width : 100%;
     height : 100%;
+    /* top : 0; 
+    left : 0; */
     margin : 0;
     padding : 0;
     position : fixed;
@@ -85,8 +87,7 @@ button {
     
 }
 
-
-
+/*drop down menu and header*/
 
 .top {
     width : 100%;
@@ -114,6 +115,7 @@ button {
     padding-bottom: 50px;
 }
 
+/*header*/
 
 #header {
     height : auto;
@@ -124,19 +126,20 @@ button {
 }
 
 .open {
-    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/menu-btn_qoh4g8.svg");
+    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1688695202/portfolio/menu-btn_ivpidt.svg");
 }
 
+/*drop down*/
 
 #dropdown {
     height :auto;
-    background-color : #014345;
+    background-color : #489799;
 
     grid-template-columns : 75% 25%;
 }
 
 .exit {
-    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/exit-menu-btn_magazp.svg");
+    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1688695977/portfolio/exit-menu-btn_gwtoqo.svg");
 }
 
 .leftdrop {

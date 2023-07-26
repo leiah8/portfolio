@@ -1,6 +1,5 @@
 // import { svgns } from "../api"
 import { gsap } from "gsap";
-import { ResumeComponent } from "../resume/resume.component";
 
 
 
@@ -10,10 +9,7 @@ export interface MainSetup {
       
     menu : HTMLElement,
     menuExit : HTMLElement,
-
-    gitBtn : HTMLElement,
-    resumeBtn1 : HTMLElement,
-    linkedInBtn1 : HTMLElement,
+    emailBtn : HTMLElement,
 
     jobBtn1 : HTMLElement
     jobBtn2 : HTMLElement
@@ -30,13 +26,9 @@ export class MainAPI {
     
     menuBtn : HTMLElement
     menuExit : HTMLElement
+    emailBtn : HTMLElement
+    emailShowing : boolean
 
-    gitBtn : HTMLElement
-    resumeBtn1 : HTMLElement
-    linkedInBtn1 : HTMLElement
-
-    gitURL : string = "https://github.com/leiah8"
-    linkedInURL : string = "https://www.linkedin.com/in/leiah-nay/"
 
     jobBtn1 : HTMLElement
     jobBtn2 : HTMLElement
@@ -60,10 +52,10 @@ export class MainAPI {
         this.menuBtn = setup.menu
         this.menuExit = setup.menuExit
 
-        this.gitBtn = setup.gitBtn
-        this.resumeBtn1 = setup.resumeBtn1
-        this.linkedInBtn1 = setup.linkedInBtn1
+        this.emailBtn = setup.emailBtn
+        this.emailShowing = false;
 
+      
         this.jobBtn1 = setup.jobBtn1
         this.jobBtn2 = setup.jobBtn2
         this.jobBtn3 = setup.jobBtn3
@@ -91,22 +83,36 @@ export class MainAPI {
 
         gsap.set(self.dropdown, {visibility : "hidden"})
         this.menuBtn.onpointerdown = function() {
-            console.log("hi")
             gsap.set(self.dropdown, {visibility : "visible"})
         }
 
         this.menuExit.onpointerdown = function() {
-            console.log("hello")
             gsap.set(self.dropdown, {visibility : "hidden"})
         }
 
-        this.gitBtn.onpointerdown = function() {
-            window.open(self.gitURL)
+        //to do : add buttons for menu list items
+
+        // this.gitBtn.onpointerdown = function() {
+        //     window.open(self.gitURL)
+        // }
+
+        // this.linkedInBtn1.onpointerdown = function() {
+        //     window.open(self.linkedInURL)
+        // }
+
+        //contact buttons 
+
+        this.emailBtn.onpointerdown = function() {
+            if (self.emailShowing) {
+                self.emailBtn.textContent = "Email"
+                self.emailShowing = false
+            }
+            else { 
+                self.emailBtn.textContent = "nayl@mcmaster.ca"
+                self.emailShowing = true
+            }
         }
 
-        this.linkedInBtn1.onpointerdown = function() {
-            window.open(self.linkedInURL)
-        }
         
     }
 

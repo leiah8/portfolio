@@ -5,7 +5,7 @@
 
    <div>
       <div #header id="header" class="top">
-         <img class="logo" src="https://res.cloudinary.com/dqcldf509/image/upload/v1688694960/portfolio/logo_hzxpc4.svg" alt="LN Logo" width="50px" height="50px">
+         <img class="logo" src="https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/logo_l9hcho.svg" alt="LN Logo" width="50px" height="50px">
          <button #menu class="menu open"> </button>
       </div>
 
@@ -17,21 +17,25 @@
          </div>
 
          <div id="dropbtns">
-            <button #gitBtn class="dropbtn">
+            <button class="dropbtn">
                <a href="https://github.com/leiah8" target="_blank">GitHub</a>
             </button>
-            <button #resumeBtn1 class="dropbtn">
+            <button class="dropbtn">
                 <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >Resume</a>
             </button>
-            <button #linkedInBtn1 class="dropbtn">
+            <button class="dropbtn">
                <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a>
             </button>
          </div>
 
          <div class="leftdrop">
             <ul class="options">
-               <li>About</li>
-               <li>Projects</li>
+               <li>
+                  <a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page">About</a>
+               </li>
+               <li>
+                  <a routerLink="projects" routerLinkActive="active" ariaCurrentWhenActive="page">Projects</a>
+               </li>
                <li>Experience</li>
                <li>Contact</li>
             </ul>
@@ -60,7 +64,7 @@
 
    <h3> My Projects </h3>
 
-   <div class="row two">
+   <div class="row three">
       <button class="project"> Project 1</button>
       <button class="project"> Project 2</button>
       <button class="project"> Project 3</button>
@@ -95,15 +99,9 @@
       <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >My Resume</a>
    </button>
 
-   <h3 class="center"> Contact Me </h3>
+   <h3 class="center"> Get In Touch </h3>
 
-   <div class="row two">
-      <button class="more">Email</button>
-      <button class="more">Phone Number</button>
-      <button class="more">
-         <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a>
-      </button>
-   </div>
+   <button #emailBtn class="more">Email</button>
 
    <p class="center end">Designed and Built by Leiah Nay</p>
 
