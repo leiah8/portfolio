@@ -7,7 +7,6 @@ import { MainSetup, MainAPI } from "./main"
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements AfterViewInit {
-  @ViewChild("header") public header?: ElementRef<HTMLElement>;
   @ViewChild("dropdown") public dropdown?: ElementRef<HTMLElement>;
   @ViewChild("menu") public menu?: ElementRef<HTMLElement>;
   @ViewChild("menuExit") public menuExit?: ElementRef<HTMLElement>;
@@ -24,7 +23,6 @@ export class MainComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     const setup = {
-      header : this.header?.nativeElement,
       dropdown : this.dropdown?.nativeElement,
       menu : this.menu?.nativeElement,
       menuExit : this.menuExit?.nativeElement,

@@ -4,7 +4,6 @@ import { gsap } from "gsap";
 
 
 export interface MainSetup {
-    header : HTMLElement,
     dropdown : HTMLElement,
       
     menu : HTMLElement,
@@ -21,7 +20,6 @@ export interface MainSetup {
 
 export class MainAPI {
 
-    header : HTMLElement
     dropdown : HTMLElement
     
     menuBtn : HTMLElement
@@ -47,7 +45,6 @@ export class MainAPI {
 
     constructor(setup : MainSetup) {
         var self = this
-        this.header = setup.header
         this.dropdown = setup.dropdown
         this.menuBtn = setup.menu
         this.menuExit = setup.menuExit

@@ -1,5 +1,6 @@
-import { ViewChild, ElementRef, AfterViewInit, Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { gsap } from "gsap";
+
 
 @Component({
   selector: 'app-projects',
@@ -10,24 +11,20 @@ export class ProjectsComponent implements AfterViewInit {
   @ViewChild("dropdown") public dropdownGet: ElementRef<HTMLElement>;
   @ViewChild("menu") public menuGet: ElementRef<HTMLElement>;
   @ViewChild("menuExit") public menuExitGet: ElementRef<HTMLElement>;
-  
+
   dropdown : HTMLElement;
-  menuBtn : HTMLElement;
-  menuExit : HTMLElement;
+  menuBtn : HTMLElement
+  menuExit : HTMLElement
 
 
-  constructor() { 
-    this.dropdown = this.dropdownGet.nativeElement;
-    this.menuBtn = this.menuGet.nativeElement;
-    this.menuExit = this.menuExitGet.nativeElement;
-      
-
-  }
+  constructor() { }
 
   ngAfterViewInit(): void {
+    this.dropdown = this.dropdownGet.nativeElement
+    this.menuBtn = this.menuGet.nativeElement
+    this.menuExit = this.menuExitGet.nativeElement
 
     this.setupButtons()
-
   }
 
   setupButtons() {
@@ -41,9 +38,6 @@ export class ProjectsComponent implements AfterViewInit {
     this.menuExit.onpointerdown = function() {
         gsap.set(self.dropdown, {visibility : "hidden"})
     }
-
-    //to do : add buttons for menu list items
-    
-}
+  }
 
 }
