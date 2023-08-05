@@ -10,6 +10,9 @@ import { ResumeComponent } from './resume/resume.component';
 import { MinecartComponent } from './minecart/minecart.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ExperienceComponent } from './experience/experience.component';
+import { MaterialBridgeComponent } from './material-bridge/material-bridge.component';
+import { MoonsPlanetsComponent } from './moons-planets/moons-planets.component';
+import { FlowersComponent } from './flowers/flowers.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { ExperienceComponent } from './experience/experience.component';
     MinecartComponent,
     ProjectsComponent,
     ExperienceComponent,
+    MaterialBridgeComponent,
+    MoonsPlanetsComponent,
+    FlowersComponent,
   ],
   imports: [
     BrowserModule,

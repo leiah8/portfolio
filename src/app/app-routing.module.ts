@@ -7,6 +7,9 @@ import { ResumeComponent } from "./resume/resume.component";
 import { ProjectsComponent } from "./projects/projects.component";
 import { MinecartComponent } from "./minecart/minecart.component";
 import { ExperienceComponent } from "./experience/experience.component";
+import { MaterialBridgeComponent } from "./material-bridge/material-bridge.component";
+import { MoonsPlanetsComponent } from "./moons-planets/moons-planets.component";
+import { FlowersComponent } from "./flowers/flowers.component";
 
 
 const routes: Routes = [
@@ -15,6 +18,9 @@ const routes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'experience', component: ExperienceComponent },
   { path: 'projects/minecart', component: MinecartComponent },
+  { path: 'projects/materialbridge', component: MaterialBridgeComponent },
+  { path: 'projects/moonsplanets', component: MoonsPlanetsComponent },
+  { path: 'projects/flowers', component: FlowersComponent },
   
 ]
 
