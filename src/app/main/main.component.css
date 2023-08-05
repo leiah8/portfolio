@@ -89,14 +89,12 @@ button {
 }
 
 .center {
-    display : grid;
-    grid-template-columns : 1fr;
-    grid-template-rows : 1fr;
-
-    padding-top : 30px;
-
     text-align : center;
-    
+    padding-top : 30px;
+}
+
+.center > p {
+    padding-top : 0;
 }
 
 /* a bit about me */
@@ -157,14 +155,21 @@ button {
     display : grid;
     grid-template-columns : 1fr;
     grid-template-rows : 3fr 3fr 3fr;
+    place-content : center
 }
 
 .job {
-    width : min(20vw, 350px); 
-    height : 6vw;
+    /* width : min(20vw, 350px);  */
+    width : 70%;
+    height : 15vh;
     border-radius : 2vw;
 
     margin : 10px;
+}
+
+#jobTitle {
+    font-size : min(28px, 2.4vw)
+
 }
 
 #jobexplanations {
@@ -266,5 +271,5 @@ button {
 }
 
 .options > li {
-    margin-bottom : 10px;
+    margin-bottom : 20px;
 }

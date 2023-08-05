@@ -784,7 +784,7 @@ export class IntegerPlatfromClass {
       var btnW = w * (120 / 1280) //(addBtn as any as HTMLElement).getBoundingClientRect().width
 
       var equationW = Math.min(Math.max((0.18*h + 10), self.allTerms.length*(0.18*h + 10)), 5*(0.18*h + 10))
-      gsap.set(this.equation, {width : equationW, x : x - equationW - btnW, y : "1.5vh"})
+      gsap.set(this.equation, {width : equationW, x : x - equationW - btnW - 10, y : "1.5vh"})
 
       console.log(x, equationW, btnW)
     }

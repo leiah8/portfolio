@@ -11,7 +11,7 @@ export class MainComponent implements AfterViewInit {
   @ViewChild("menu") public menu?: ElementRef<HTMLElement>;
   @ViewChild("menuExit") public menuExit?: ElementRef<HTMLElement>;
 
-  @ViewChild("emailBtn") public emailBtn?: ElementRef<HTMLElement>;
+  // @ViewChild("emailBtn") public emailBtn?: ElementRef<HTMLElement>;
   
   @ViewChild("jobBtn1") public jobBtn1?: ElementRef<HTMLElement>;
   @ViewChild("jobBtn2") public jobBtn2?: ElementRef<HTMLElement>;
@@ -27,7 +27,7 @@ export class MainComponent implements AfterViewInit {
       menu : this.menu?.nativeElement,
       menuExit : this.menuExit?.nativeElement,
 
-      emailBtn : this.emailBtn.nativeElement,
+      // emailBtn : this.emailBtn.nativeElement,
       jobBtn1 : this.jobBtn1.nativeElement,
       jobBtn2 : this.jobBtn2.nativeElement,
       jobBtn3 : this.jobBtn3.nativeElement,

@@ -18,7 +18,7 @@ h1 {
     font-family : 'Yeseva One';
     font-weight : normal;
     font-size : 42px;
-    padding-top : 5vh;
+    padding-top : 10vh;
     padding-bottom : 2%;
 
     text-align : center;
@@ -44,8 +44,8 @@ h1 {
 
     border-radius : 10%;
 
-    width : min(20vw, 350px); 
-    height : min(20vw, 350px); 
+    width : min(25vw, 350px); 
+    height : min(25vw, 350px); 
 
     margin : 2vw;
 
@@ -87,6 +87,7 @@ button {
 
 
 
+/*drop down menu and header*/
 
 .top {
     width : 100%;
@@ -114,6 +115,7 @@ button {
     padding-bottom: 50px;
 }
 
+/*header*/
 
 #header {
     height : auto;
@@ -127,6 +129,7 @@ button {
     background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/menu-btn_qoh4g8.svg");
 }
 
+/*drop down*/
 
 #dropdown {
     height :auto;
@@ -165,11 +168,11 @@ button {
     font-size : min(3vw, 28px);
 
     list-style : none;
-    color : #489799;
+    color : #196769;
 
     margin-top : 0;
 }
 
 .options > li {
-    margin-bottom : 10px;
+    margin-bottom : 20px;
 }

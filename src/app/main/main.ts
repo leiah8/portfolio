@@ -8,7 +8,7 @@ export interface MainSetup {
       
     menu : HTMLElement,
     menuExit : HTMLElement,
-    emailBtn : HTMLElement,
+    // emailBtn : HTMLElement,
 
     jobBtn1 : HTMLElement
     jobBtn2 : HTMLElement
@@ -24,7 +24,7 @@ export class MainAPI {
     
     menuBtn : HTMLElement
     menuExit : HTMLElement
-    emailBtn : HTMLElement
+    // emailBtn : HTMLElement
     emailShowing : boolean
 
 
@@ -35,8 +35,8 @@ export class MainAPI {
     jobTitle : HTMLElement
     jobP : HTMLElement
 
-    job1Title : string = "Knowledgehook - Gamified Education Content Developer (Co-op)";
-    job2Title : string = "Knowledgehook - Content Engineer Assistant (Co-op)";
+    job1Title : string = "Knowledgehook - Gamified Education Content Developer";
+    job2Title : string = "Knowledgehook - Content Engineer Assistant";
     job3Title : string = "Schwartz/Reisman Centre - Lifeguard and Swim Instructor";
 
     job1P : string = "Developed math games in Angular using Typescript, HTML, and CSS, adaptable for various grade levels. Conducted useability testing sessions. Used Socket.io and other frameworks to collaboratively develop the backend of a multiplayer game."
@@ -49,7 +49,7 @@ export class MainAPI {
         this.menuBtn = setup.menu
         this.menuExit = setup.menuExit
 
-        this.emailBtn = setup.emailBtn
+        // this.emailBtn = setup.emailBtn
         this.emailShowing = false;
 
       
@@ -99,34 +99,37 @@ export class MainAPI {
 
         //contact buttons 
 
-        this.emailBtn.onpointerdown = function() {
-            if (self.emailShowing) {
-                self.emailBtn.textContent = "Email"
-                self.emailShowing = false
-            }
-            else { 
-                self.emailBtn.textContent = "nayl@mcmaster.ca"
-                self.emailShowing = true
-            }
-        }
+        // this.emailBtn.addEventListener("click", function() {
+        //     if (self.emailShowing) {
+        //         self.emailBtn.textContent = "Email"
+        //         self.emailShowing = false
+        //     }
+        //     else { 
+        //         self.emailBtn.textContent = "nayl@mcmaster.ca"
+        //         self.emailShowing = true
+        //     }
+        // })
 
         
     }
 
     setupJobs() {
         var self = this
+        this.jobBtn1.textContent = self.job1Title
         this.jobBtn1.onpointerdown = function() {
             self.jobTitle.textContent = self.job1Title
             self.jobP.textContent = self.job1P
             console.log("1")
         }
 
+        this.jobBtn2.textContent = self.job2Title
         this.jobBtn2.onpointerdown = function() {
             self.jobTitle.textContent = self.job2Title
             self.jobP.textContent = self.job2P
             console.log("2")
         }
 
+        this.jobBtn3.textContent = self.job3Title
         this.jobBtn3.onpointerdown = function() {
             self.jobTitle.textContent = self.job3Title
             self.jobP.textContent = self.job3P

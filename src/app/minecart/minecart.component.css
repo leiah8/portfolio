@@ -1,6 +1,8 @@
-html {
-    display : flex;
-}
+/* html {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+} */
 
 body {
     display : grid;
