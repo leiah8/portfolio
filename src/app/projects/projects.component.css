@@ -39,10 +39,11 @@ h1 {
 }
 
 .projectOptions > li {
-    background-color: white;
-    color : black;
+    /* background-color: white; */
+    color : #ffff;
 
     border-radius : 10%;
+    border : 10px solid #fff;
 
     width : min(25vw, 350px); 
     height : min(25vw, 350px); 

@@ -112,6 +112,10 @@ button {
     margin-bottom: auto;
     width : 250px;
     height : 250px;
+
+    border-radius : 16px;
+    border : 8px solid #fff
+    
 }
 
 /* my projects */
@@ -131,7 +135,10 @@ button {
     display: block;
     margin-left: auto;
     margin-right: auto;
+
+    color : #ffff;
 }
+
 
 .more {
     width : 150px;
@@ -166,6 +173,10 @@ button {
 
     margin : 10px;
 }
+.job:hover {
+    cursor : pointer
+}
+
 
 #jobTitle {
     font-size : min(28px, 2.4vw)
