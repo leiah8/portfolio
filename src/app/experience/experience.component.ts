@@ -12,9 +12,11 @@ export class ExperienceComponent implements AfterViewInit {
   @ViewChild("menu") public menuGet: ElementRef<HTMLElement>;
   @ViewChild("menuExit") public menuExitGet: ElementRef<HTMLElement>;
 
+
   dropdown : HTMLElement;
   menuBtn : HTMLElement
   menuExit : HTMLElement
+  
 
   constructor() { }
 
@@ -24,7 +26,16 @@ export class ExperienceComponent implements AfterViewInit {
     this.menuExit = this.menuExitGet.nativeElement
 
     this.setupButtons()
+
+    
+
+
+
+    
   }
+
+  
+
 
   setupButtons() {
     var self = this

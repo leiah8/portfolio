@@ -52,6 +52,8 @@ h3 {
     font-weight : normal;
     font-size : 28px;
     color : white;
+
+    padding-top : 5vh
 }
 
 p,li {
@@ -68,16 +70,14 @@ p,li {
 
     width :  min(70vw, 1000px);
 
-    padding-left : 10vw;
-    padding-right : 10vw;
-    padding-bottom : 10vh
+    padding : 5vw;
 }
 
 
 
 .job {
     display : grid;
-    grid-template-columns : 2fr 2fr;
+    grid-template-columns : 60% 40%;
     grid-gap : 5vh;
 }
 
@@ -85,6 +85,9 @@ p,li {
 .jobImg {
     width : max(25vw, 200px);
     height : max(25vw, 200px); 
+
+    border-radius : 10%;
+    border : 1vw solid #fff;
 }
 
 .right  {
@@ -229,3 +232,67 @@ p,li {
     color : #196769;
 }
 
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    h3 {
+        font-size : 16px;
+    }
+
+    .container {
+        width :  90vw
+    }
+    
+
+    
+
+.job {
+    display : grid;
+    grid-template-columns : 1fr;
+    grid-gap : 5vh;
+}
+
+/* to do */
+/* .jobImg {
+    width : max(25vw, 200px);
+    height : max(25vw, 200px); 
+} */
+
+.right, .left  {
+    display : block;
+    margin-left: auto;
+    margin-right: auto;
+} 
+    
+    /* drop down*/
+
+    #dropdown {
+    
+        grid-template-columns : 60% 40%;
+    }
+
+    .dropbtn {
+        width : 80px;
+        height : 80px;
+    
+    }
+    
+    .options {
+        font-family : 'Yeseva One';
+        font-weight : normal;
+        font-size : 22px;
+    
+        list-style : none;
+        color : #196769;
+    
+        margin-top : 0;
+        padding-left : 10px;
+    }
+
+    
+    
+    
+    
+}

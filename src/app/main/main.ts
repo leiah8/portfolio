@@ -119,21 +119,18 @@ export class MainAPI {
         this.jobBtn1.onpointerdown = function() {
             self.jobTitle.textContent = self.job1Title
             self.jobP.textContent = self.job1P
-            console.log("1")
         }
 
         this.jobBtn2.textContent = self.job2Title
         this.jobBtn2.onpointerdown = function() {
             self.jobTitle.textContent = self.job2Title
             self.jobP.textContent = self.job2P
-            console.log("2")
         }
 
         this.jobBtn3.textContent = self.job3Title
         this.jobBtn3.onpointerdown = function() {
             self.jobTitle.textContent = self.job3Title
             self.jobP.textContent = self.job3P
-            console.log("3")
         }
     }
 

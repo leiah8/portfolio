@@ -28,6 +28,7 @@ h1 {
 .projectOptions {
     list-style : none;
     padding: 0;
+    padding-left : 0;
     font-family : 'Open Sans';
 
     width :  min(90vw, 1280px);
@@ -43,10 +44,10 @@ h1 {
     color : #ffff;
 
     border-radius : 10%;
-    border : 10px solid #fff;
+    border : 1vw solid #fff;
 
-    width : min(25vw, 350px); 
-    height : min(25vw, 350px); 
+    width : min(22vw, 350px); 
+    height : min(22vw, 350px); 
 
     margin : 2vw;
 
@@ -176,4 +177,40 @@ button {
 
 .options > li {
     margin-bottom : 20px;
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    
+    
+    /* drop down*/
+
+    #dropdown {
+    
+        grid-template-columns : 60% 40%;
+    }
+
+    .dropbtn {
+        width : 80px;
+        height : 80px;
+    
+    }
+    
+    .options {
+        font-family : 'Yeseva One';
+        font-weight : normal;
+        font-size : 22px;
+    
+        list-style : none;
+        color : #196769;
+    
+        margin-top : 0;
+        padding-left : 10px;
+    }
+    
+    
+    
 }

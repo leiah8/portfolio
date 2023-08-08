@@ -179,7 +179,8 @@ button {
 
 
 #jobTitle {
-    font-size : min(28px, 2.4vw)
+    font-size : min(28px, 2.4vw);
+    margin-top : 0
 
 }
 
@@ -187,7 +188,8 @@ button {
     text-align : left;
     margin-top : 5px;
 
-    margin-right : 20%; /* TO DO*/
+    /* margin-right : 20%;  */
+    /* TO DO */
 
 }
 
@@ -283,4 +285,67 @@ button {
 
 .options > li {
     margin-bottom : 20px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .one {
+        grid-template-columns : 1fr; 
+    }
+
+    html {
+        margin-left : -2vw;
+    }
+
+    #jobTitle {
+        font-size : 20px;
+        margin-top : 10px;
+    }
+
+    .job {
+        width : 25vw;
+        height : 15vh;
+        margin : 5px;
+
+        font-size : 2.2vw
+    }
+   
+    .experience {
+        grid-template-columns : 1fr;
+        
+    }
+    
+    .column {
+        grid-template-rows : 1fr;
+        grid-template-columns : 3fr 3fr 3fr;
+    } 
+    
+    /* drop down*/
+
+    #dropdown {
+    
+        grid-template-columns : 60% 40%;
+    }
+
+    .dropbtn {
+        width : 80px;
+        height : 80px;
+    
+    }
+    
+    .options {
+        font-family : 'Yeseva One';
+        font-weight : normal;
+        font-size : 22px;
+    
+        list-style : none;
+        color : #196769;
+    
+        margin-top : 0;
+        padding-left : 10px;
+    }
+    
+    
+    
 }
