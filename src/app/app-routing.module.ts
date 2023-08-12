@@ -10,6 +10,8 @@ import { ExperienceComponent } from "./experience/experience.component";
 import { MaterialBridgeComponent } from "./material-bridge/material-bridge.component";
 import { MoonsPlanetsComponent } from "./moons-planets/moons-planets.component";
 import { FlowersComponent } from "./flowers/flowers.component";
+import { PlanetFactoryComponent } from "./planet-factory/planet-factory.component";
+import { TradeBlocksComponent } from "./trade-blocks/trade-blocks.component";
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'projects/materialbridge', component: MaterialBridgeComponent },
   { path: 'projects/moonsplanets', component: MoonsPlanetsComponent },
   { path: 'projects/flowers', component: FlowersComponent },
+  { path: 'projects/planetfactory', component: PlanetFactoryComponent },
+  { path: 'projects/tradeblocks', component: TradeBlocksComponent },
   
 ]
 

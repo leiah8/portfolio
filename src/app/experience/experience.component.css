@@ -1,65 +1,67 @@
 html {
-    background : #196769;
-    width : 100%;
-    height : 100%;
-    margin : 0;
-    padding : 0;
-    position : fixed;
+    background: #196769;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
     overflow-y: scroll;
 
 }
 
 body {
-    padding-bottom : 20vh;
+    padding-bottom: 20vh;
 }
 
 h1 {
-    font-family : 'Yeseva One';
-    font-weight : normal;
-    font-size : 42px;
-    padding-top : 15vh;
-    padding-bottom : 2%;
+    font-family: 'Yeseva One';
+    font-weight: normal;
+    font-size: 42px;
+    padding-top: 15vh;
+    margin-bottom: 0;
 
-    text-align : center;
-    color : white
+    text-align: center;
+    color: white
 }
 
 a {
-    text-decoration: none; color : inherit
+    text-decoration: none;
+    color: inherit
 }
 
 button {
     background-color: white;
-    outline : none;
-    border : white;
+    outline: none;
+    border: white;
 
-    font-family : 'Open Sans'
+    font-family: 'Open Sans';
 }
 
 .more {
-    width : 150px;
-    height : 50px;
-    border-radius : 10px;
+    width: 150px;
+    height: 50px;
+    border-radius: 10px;
 
     display: block;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 h3 {
-    font-family : 'Yeseva One';
-    font-weight : normal;
-    font-size : 28px;
-    color : white;
+    font-family: 'Yeseva One';
+    font-weight: normal;
+    font-size: 28px;
+    color: white;
 
-    padding-top : 5vh
+    padding-top: 5vh
 }
 
-p,li {
-    font-family : 'Open Sans';
-    font-size : 100%;
-    color : white;
+p,
+li {
+    font-family: 'Open Sans';
+    font-size: 100%;
+    color: white;
 }
 
 
@@ -68,36 +70,37 @@ p,li {
     margin-left: auto;
     margin-right: auto;
 
-    width :  min(70vw, 1000px);
+    width: min(70vw, 1000px);
 
-    padding : 5vw;
+    padding: 5vw;
 }
 
 
 
 .job {
-    display : grid;
-    grid-template-columns : 60% 40%;
-    grid-gap : 5vh;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 5vh;
 }
 
 
 .jobImg {
-    width : max(25vw, 200px);
-    height : max(25vw, 200px); 
+    width: max(20vw, 150px);
+    height: max(20vw, 150px);
 
-    border-radius : 10%;
-    border : 1vw solid #fff;
+    border-radius: 10%;
+    border: 1vw solid #fff;
 }
 
-.right  {
-    display : block;
+.right {
+    display: block;
     margin-left: auto;
 }
 
 .jobTitle {
-    text-align : center
+    text-align: center
 }
+
 
 
 /*drop down menu and header*/
@@ -110,10 +113,14 @@ p,li {
     position : fixed;
     top : 0;
     left : 0;
+
+    /* padding-top: 1.5vh; 
+    padding-bottom : 1vh */
 }
 
 .logo {
     margin-left: 10px; 
+
 }
 
 .menu {
@@ -121,7 +128,7 @@ p,li {
     height : 50px;
 
     position : fixed; 
-    top : -1px; 
+    top : 1.5vh; 
     right : 10px;
 
     background-size: cover;
@@ -136,48 +143,8 @@ p,li {
     grid-template-columns : 2fr 2fr;
     grid-template-rows: 1fr;
 
-}
-
-.open {
-    background-image : url("https://res.cloudinary.com/dqcldf509/image/upload/v1690400117/portfolio/menu-btn_qoh4g8.svg");
-}
-
-
-/*drop down menu and header*/
-
-.top {
-    width : 100%;
-
-    display : grid; 
-
-    position : fixed;
-    top : 0;
-    left : 0;
-}
-
-.logo {
-    margin-left: 10px; 
-}
-
-.menu {
-    width : 50px;
-    height : 50px;
-
-    position : fixed; 
-    top : -1px; 
-    right : 10px;
-
-    background-size: cover;
-    padding-bottom: 50px;
-}
-
-/*header*/
-
-#header {
-    height : auto;
-    background-color : white;
-    grid-template-columns : 2fr 2fr;
-    grid-template-rows: 1fr;
+    padding-top: 1.5vh; 
+    padding-bottom : 1vh
 
 }
 
@@ -192,6 +159,9 @@ p,li {
     background-color : #014345;
 
     grid-template-columns : 75% 25%;
+
+    padding-top: 1.5vh; 
+    padding-bottom : 1vh
 }
 
 .exit {
@@ -200,6 +170,9 @@ p,li {
 
 .leftdrop {
     background-color : white;
+
+    margin-top: -1.5vh; 
+    margin-bottom : -1vh
 }
 
 #dropbtns {
@@ -218,18 +191,19 @@ p,li {
     margin : 15px
 }
 
-.options {
 
-    list-style : none;
-    margin-top : 0;
+
+.options {
+    list-style: none;
+    margin-top: 0;
 }
 
-.options > li {
-    margin-bottom : 20px;
-    font-family : 'Yeseva One';
-    font-weight : normal;
-    font-size : min(3vw, 28px);
-    color : #196769;
+.options>li {
+    margin-bottom: 20px;
+    font-family: 'Yeseva One';
+    font-weight: normal;
+    font-size: min(3vw, 28px);
+    color: #196769;
 }
 
 
@@ -238,34 +212,26 @@ p,li {
     /* For mobile phones: */
 
     h3 {
-        font-size : 16px;
+        font-size: 16px;
     }
 
     .container {
-        width :  90vw
+        width: 90vw
     }
-    
 
-    
+    .job {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 5vh;
+    }
 
-.job {
-    display : grid;
-    grid-template-columns : 1fr;
-    grid-gap : 5vh;
-}
 
-/* to do */
-/* .jobImg {
-    width : max(25vw, 200px);
-    height : max(25vw, 200px); 
-} */
+    .right, .left {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-.right, .left  {
-    display : block;
-    margin-left: auto;
-    margin-right: auto;
-} 
-    
     /* drop down*/
 
     #dropdown {
@@ -273,26 +239,49 @@ p,li {
         grid-template-columns : 60% 40%;
     }
 
-    .dropbtn {
-        width : 80px;
-        height : 80px;
-    
-    }
-    
-    .options {
-        font-family : 'Yeseva One';
-        font-weight : normal;
-        font-size : 22px;
-    
-        list-style : none;
-        color : #196769;
-    
-        margin-top : 0;
-        padding-left : 10px;
+    #dropdown > .logo {
+        width : 50px;
+        height : 50px;
     }
 
+    .dropbtn {
+        width : 85%;
+        height : 5vh;
+    }
+
+    #dropbtns {
+        padding-bottom : 20px;
+        margin-left : 0;
+        margin-right : 0;
     
+        display : grid;
+        /* grid-template-rows: 3fr 3fr 3fr; */
+        grid-template-rows : 10vh 10vh 10vh;
+        align-items : center;
+    }
+
+
+    .options {
+        list-style: none;
+        margin-top: 3vh;
+
+        padding-left : 10px;
+
+        display : grid;
+        /* grid-template-rows: 3fr 3fr 3fr; */
+        grid-template-rows : 10vh 10vh 10vh;
+        align-items : center;
+    }
     
-    
-    
+    .options>li {
+        /* margin-bottom: 5vh; */
+        
+        font-size: 22px;
+        color: #196769;
+    }
+
+
+
+
+
 }

@@ -13,6 +13,8 @@ import { ExperienceComponent } from './experience/experience.component';
 import { MaterialBridgeComponent } from './material-bridge/material-bridge.component';
 import { MoonsPlanetsComponent } from './moons-planets/moons-planets.component';
 import { FlowersComponent } from './flowers/flowers.component';
+import { PlanetFactoryComponent } from './planet-factory/planet-factory.component';
+import { TradeBlocksComponent } from './trade-blocks/trade-blocks.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { FlowersComponent } from './flowers/flowers.component';
     MaterialBridgeComponent,
     MoonsPlanetsComponent,
     FlowersComponent,
+    PlanetFactoryComponent,
+    TradeBlocksComponent,
   ],
   imports: [
     BrowserModule,

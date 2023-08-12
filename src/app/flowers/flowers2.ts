@@ -966,13 +966,13 @@ export class ManyFlowersAPI {
 
         //show buttons
         if (completed || this.game.attempts >= 3) {
-            self.tl.to(self.retryBtn, { scale: 0, x: "2vh", y: "2vh", rotation: 0, duration: 0 })
+            self.tl.to(self.retryBtn, { scale: 0, x: "0.5vw", y: "0.5vw", rotation: 0, duration: 0 })
             self.tl.to([this.retryBtn, this.nextBtn], { scale: 1 })
         }
         else {
 
             //show rotating retry button in the middle
-            gsap.set(self.retryBtn, { scale: 0, x: "90vh", y: "40vh", rotation: 0 })
+            gsap.set(self.retryBtn, { scale: 0, x: "50vw", y: "26vw", rotation: 0 })
             this.tl.to(self.retryBtn, { scale: 3, duration: 1 })
             this.tl.to(self.retryBtn, { repeat: -1, duration: 4, rotation: 360, ease: "bounce" })
 

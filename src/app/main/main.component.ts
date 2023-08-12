@@ -18,6 +18,7 @@ export class MainComponent implements AfterViewInit {
   @ViewChild("jobBtn3") public jobBtn3?: ElementRef<HTMLElement>;
   @ViewChild("jobTitle") public jobTitle?: ElementRef<HTMLElement>;
   @ViewChild("jobP") public jobP?: ElementRef<HTMLElement>;
+  @ViewChild("jobDate") public jobDate?: ElementRef<HTMLElement>;
   
   constructor() { }
 
@@ -34,6 +35,7 @@ export class MainComponent implements AfterViewInit {
 
       jobTitle : this.jobTitle.nativeElement,
       jobP : this.jobP.nativeElement,
+      jobDate : this.jobDate.nativeElement,
 
     } as MainSetup
 

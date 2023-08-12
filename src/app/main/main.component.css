@@ -16,13 +16,12 @@ html {
     background : #196769;
     width : 100%;
     height : 100%;
-    /* top : 0; 
-    left : 0; */
+    
     margin : 0;
     padding : 0;
+   
     position : fixed;
     overflow-y : scroll;
-
 
 }
 
@@ -30,6 +29,8 @@ body {
     color : #ffffff;
     margin : 5%;
     max-width : 1150px;
+    margin-top : 10vh;
+
 
     display: block;
     padding-left : 20px;
@@ -86,6 +87,11 @@ button {
     border : white;
 
     font-family : 'Open Sans'
+
+}
+
+button:active {
+    background-color : #dddddd
 }
 
 .center {
@@ -132,6 +138,8 @@ button {
     width : min(20vw, 350px); 
     border-radius : 10%;
 
+    border : 4px solid #fff;
+
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -154,8 +162,9 @@ button {
 
 .experience {
     display : grid;
-    grid-template-columns : 2fr 2fr;
+    grid-template-columns : 40% 60%;
     grid-template-rows : 1fr;
+
 }
 
 .column {
@@ -167,7 +176,7 @@ button {
 
 .job {
     /* width : min(20vw, 350px);  */
-    width : 70%;
+    width : 80%;
     height : 15vh;
     border-radius : 2vw;
 
@@ -180,22 +189,38 @@ button {
 
 #jobTitle {
     font-size : min(28px, 2.4vw);
-    margin-top : 0
+    margin-top : 0;
+    margin-bottom : 2px;
 
 }
 
+/* #jobDate {
+
+} */
+
 #jobexplanations {
+    width : 90%;
     text-align : left;
     margin-top : 5px;
 
-    /* margin-right : 20%;  */
-    /* TO DO */
+    margin-left : 2%;
 
+    font-family : 'Open Sans';
+    font-size : 100%;
+}
+/* 
+#jobexplanations > li {
+    margin-bottom : 5px
+} */
+
+#jobP {
+    margin-left : 4%;
 }
 
 .end {
     margin-top : 100px
 }
+
 
 /*drop down menu and header*/
 
@@ -207,10 +232,14 @@ button {
     position : fixed;
     top : 0;
     left : 0;
+
+    /* padding-top: 1.5vh; 
+    padding-bottom : 1vh */
 }
 
 .logo {
     margin-left: 10px; 
+
 }
 
 .menu {
@@ -218,7 +247,7 @@ button {
     height : 50px;
 
     position : fixed; 
-    top : -1px; 
+    top : 1.5vh; 
     right : 10px;
 
     background-size: cover;
@@ -233,6 +262,9 @@ button {
     grid-template-columns : 2fr 2fr;
     grid-template-rows: 1fr;
 
+    padding-top: 1.5vh; 
+    padding-bottom : 1vh
+
 }
 
 .open {
@@ -246,6 +278,9 @@ button {
     background-color : #014345;
 
     grid-template-columns : 75% 25%;
+
+    padding-top: 1.5vh; 
+    padding-bottom : 1vh
 }
 
 .exit {
@@ -254,6 +289,9 @@ button {
 
 .leftdrop {
     background-color : white;
+
+    margin-top: -1.5vh; 
+    margin-bottom : -1vh
 }
 
 #dropbtns {
@@ -288,15 +326,25 @@ button {
 }
 
 
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
+
+    body {
+        margin-top : 10vh;
+        margin-left : 0;
+        margin-right : 5vw
+    }
+
+    h1 {
+        font-size : 36px;
+    }
+
     .one {
         grid-template-columns : 1fr; 
     }
 
-    html {
-        margin-left : -2vw;
-    }
+    
 
     #jobTitle {
         font-size : 20px;
@@ -328,24 +376,39 @@ button {
         grid-template-columns : 60% 40%;
     }
 
-    .dropbtn {
-        width : 80px;
-        height : 80px;
-    
+    #dropdown > .logo {
+        width : 50px;
+        height : 50px;
     }
+
+    .dropbtn {
+        width : 85%;
+        height : 35px;
+    }
+
+    #dropbtns {
+        padding-bottom : 20px;
+        margin-left : 0;
+        margin-right : 0;
     
+        display : grid;
+        grid-template-rows: 3fr 3fr 3fr;
+    }
+
+
     .options {
-        font-family : 'Yeseva One';
-        font-weight : normal;
-        font-size : 22px;
-    
-        list-style : none;
-        color : #196769;
-    
-        margin-top : 0;
+        list-style: none;
+        margin-top: 20%;
+
         padding-left : 10px;
     }
     
+    .options>li {
+        margin-bottom: 26%;
+        
+        font-size: 22px;
+        color: #196769;
+    }
     
     
 }
