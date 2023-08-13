@@ -46,8 +46,30 @@ export class MoonsPlanetsComponent implements AfterViewInit {
 
     //max 10 moons per planet
     //max 10 planets total
+
+    // window.onload = function() {
+    //   if (( window.innerWidth / window.innerHeight < 0.9 ) ) {
+    //     //change template url to global one 
+    //   }
+    //   else {
+    //     console.log("not ")
+    //     var interactive = new MoonsPlanetsAPI(setup, [game1, game2])
+    //   }
+    // }
+
+    // window.onresize = function() {
+    //   if (( window.innerWidth / window.innerHeight < 0.9) ) {
+    //     //change template url to global one 
+    //   }
+    //   else {
+    //     var interactive = new MoonsPlanetsAPI(setup, [game1, game2])
+    //   }
+    // }
+
+    var interactive = new MoonsPlanetsAPI(setup, [game1, game2])
+      
+        
+    }
   
-    const interactive = new MoonsPlanetsAPI(setup, [game1, game2])
-  }
 
 }

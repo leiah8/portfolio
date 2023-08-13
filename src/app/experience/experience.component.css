@@ -37,6 +37,14 @@ button {
     font-family: 'Open Sans';
 }
 
+button:active {
+    background-color : #dddddd
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 .more {
     width: 150px;
     height: 50px;

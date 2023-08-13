@@ -17,14 +17,14 @@
          </div>
 
          <div id="dropbtns">
-            <button class="dropbtn">
-               <a href="https://github.com/leiah8" target="_blank">GitHub</a>
+            <button class="dropbtn" onclick=" window.open('https://github.com/leiah8', '_blank');">
+               GitHub <!-- <a href="https://github.com/leiah8" target="_blank">GitHub</a> -->
             </button>
-            <button class="dropbtn">
-                <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >Resume</a>
+            <button class="dropbtn" onclick=" window.open('/resume', '_blank');">
+                Resume <!-- <a routerLink="/resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >Resume</a> -->
             </button>
-            <button class="dropbtn">
-               <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a>
+            <button class="dropbtn" onclick=" window.open('https://www.linkedin.com/in/leiah-nay/', '_blank');">
+               LinkedIn <!-- <a href="https://www.linkedin.com/in/leiah-nay/" target="_blank">LinkedIn</a> -->
             </button>
          </div>
 
@@ -63,16 +63,21 @@
    <h3> My Projects </h3>
 
    <div class="row three">
-      <button class="project" style="background-image : url('https://res.cloudinary.com/dqcldf509/image/upload/v1691445613/portfolio/minecart-screenshot_n9inby.png');background-size:cover"> <a routerLink="projects/minecart" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank">Minecart</a></button>
-      <button class="project" style="background-image : url('https://res.cloudinary.com/dqcldf509/image/upload/v1691445181/portfolio/bridge-screenshot2_qxguqk.png');background-size:cover"> <a routerLink="projects/materialbridge" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank">Material Bridge</a></button>
-      <button class="project" style="background-image : url('https://res.cloudinary.com/dqcldf509/image/upload/v1691445496/portfolio/Screenshot_2023-08-07_175354_oa8wts.png');background-size:cover"> <a routerLink="projects/moonsplanets" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank">Moons and Planets</a></button>
+      <button class="project" onclick=" window.open('projects/minecart');" style="background-image : url('https://res.cloudinary.com/dqcldf509/image/upload/v1691445613/portfolio/minecart-screenshot_n9inby.png');background-size:cover"> 
+         Minecart <!-- <a routerLink="projects/minecart" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank">Minecart</a> -->
+      </button>
+      <button class="project" onclick=" window.open('projects/materialbridge');" style="background-image : url('https://res.cloudinary.com/dqcldf509/image/upload/v1691445181/portfolio/bridge-screenshot2_qxguqk.png');background-size:cover"> 
+         Material Bridge<!-- <a routerLink="projects/materialbridge" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank">Material Bridge</a> -->
+      </button>
+      <button class="project" onclick=" window.open('projects/moonsplanets');" style="background-image : url('https://res.cloudinary.com/dqcldf509/image/upload/v1691445496/portfolio/Screenshot_2023-08-07_175354_oa8wts.png');background-size:cover"> 
+         Moons and Planets <!-- <a routerLink="projects/moonsplanets" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank">Moons and Planets</a> -->
+      </button>
       
-     
    </div>
 
-   <div class="center">
+   <div class="center" onclick=" window.open('projects', '_self');">
         <button class="more">
-         <a routerLink="projects" routerLinkActive="active" ariaCurrentWhenActive="page">See More</a>
+         See More <!-- <a routerLink="projects" routerLinkActive="active" ariaCurrentWhenActive="page">See More</a> -->
         </button>
    </div>
 
@@ -93,8 +98,8 @@
       </div>
    </div>
 
-   <button class="more">
-      <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >My Resume</a>
+   <button class="more" onclick=" window.open('/resume', '_blank');">
+      My Resume <!-- <a routerLink="resume" routerLinkActive="active" ariaCurrentWhenActive="page" target="_blank" >My Resume</a> -->
    </button>
 
    <h3 class="center"> Contact Me </h3>

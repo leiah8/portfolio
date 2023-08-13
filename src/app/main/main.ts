@@ -52,7 +52,7 @@ export class MainAPI {
         "<li> Leveraged GitHub to effectively synchronize and co-develop software projects with other engineers </li>"
     
     
-    job2P : string = "<li> Developed 12 interactive math tools using Angular that have been used by students globally </li>" +
+    job2P : string = "<li> Developed twelve interactive math tools using Angular that have been used by students globally </li>" +
         "<li> Proposed alternative technical solutions to overcome design constraints and increase adaptability </li>" +
         "<li> Collaborated with educators and fellow developers to design interactive math questions for students of varying levels and ages </li>" +
         "<li> Tested and conducted QA to create detailed bug tickets for projects developed by myself and coworkers </li>"

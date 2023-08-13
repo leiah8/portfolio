@@ -59,6 +59,10 @@ h1 {
 
 }
 
+.projectOptions > li:hover {
+    cursor: pointer;
+}
+
 #container {
     display : grid;
     place-content : center;
@@ -75,6 +79,15 @@ button {
 
     font-family : 'Open Sans'
 }
+
+button:active {
+    background-color : #dddddd
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 
 .more {
     width : 150px;

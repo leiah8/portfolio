@@ -94,6 +94,10 @@ button:active {
     background-color : #dddddd
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 .center {
     text-align : center;
     padding-top : 30px;
