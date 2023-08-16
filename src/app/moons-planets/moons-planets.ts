@@ -100,28 +100,28 @@ export class MoonsPlanetsAPI {
         this.setupArrows()
         this.setupPlanets()
 
-        //buttons
-        var playBtn = document.createElementNS(svgns,"use")
-        this.controls.appendChild(playBtn)
-        playBtn.setAttribute("href","#play-btn")
-        gsap.set(playBtn, {x : 10, y : 10, transformOrigin : "35px 35px"})
+        // var isTouch = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
+        // var hasMouse = matchMedia('(pointer:fine)').matches
 
-        playBtn.onpointerdown = function(e) {
-            self.game.attempts++;
-            self.canEdit = false
-            self.tl.to(playBtn, {duration : 0.2, scale : 0})
-            self.playAnimation()
-        }   
-        this.playBtn = playBtn
+        // console.log("TOUCH", isTouch, "MOUSE", hasMouse)
+
+        //buttons
 
         var retryBtn = document.createElementNS(svgns,"use")
         this.controls.appendChild(retryBtn)
         retryBtn.setAttribute("href","#retry-btn")
         gsap.set(retryBtn, {x : 10, y : 10, transformOrigin : "35px 35px", scale : 0})
 
-        retryBtn.onpointerdown = function(e) {
+        // retryBtn.onpointerdown = function(e) {
+        //     self.reset()
+        // }
+
+        
+        
+        retryBtn.addEventListener('click', function() {
             self.reset()
-        }
+        })
+        
         this.retryBtn = retryBtn
 
         var nextBtn = document.createElementNS(svgns,"use")
@@ -129,10 +129,39 @@ export class MoonsPlanetsAPI {
         nextBtn.setAttribute("href","#next-btn")
         gsap.set(nextBtn, {x : 1180, y : 10, transformOrigin : "35px 35px", scale : 0})
 
-        nextBtn.onpointerdown = function(e) {
+        // nextBtn.onpointerdown = function(e) {
+        //     self.nextGame()
+        // }
+        
+        nextBtn.addEventListener('click', function() {
             self.nextGame()
-        }
+        })
+    
         this.nextBtn = nextBtn
+
+        var playBtn = document.createElementNS(svgns,"use")
+        this.controls.appendChild(playBtn)
+        playBtn.setAttribute("href","#play-btn")
+        gsap.set(playBtn, {x : 10, y : 10, transformOrigin : "35px 35px"})
+
+        // playBtn.onpointerdown = function(e) {
+        //     self.game.attempts++;
+        //     self.canEdit = false
+        //     self.tl.to(playBtn, {duration : 0.2, scale : 0})
+        //     self.playAnimation()
+        // }   
+
+        
+        playBtn.addEventListener('click', function() {
+            self.game.attempts++;
+            self.canEdit = false
+            self.tl.to(playBtn, {duration : 0.2, scale : 0})
+            self.playAnimation()
+
+        })
+    
+            
+        this.playBtn = playBtn
 
     }
 
@@ -609,6 +638,16 @@ export class MoonsPlanetsAPI {
             this.arena.removeChild(el)
         });
         this.animationMoons = []
+
+        //remove target moons and planets 
+        this.gameEls.forEach(el => {
+            this.arena.removeChild(el)
+        });
+        this.gameEls = []
+        this.targetMoonCoords = []
+        this.targetMoons = []
+
+        this.setupPlanets()
 
         //reset buttons
         gsap.set(self.playBtn, {scale : 1})
