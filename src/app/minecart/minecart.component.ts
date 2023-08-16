@@ -42,6 +42,11 @@ export class MinecartComponent implements AfterViewInit {
   @ViewChild("backwheel") public backWheel?: ElementRef<SVGSVGElement>;
   @ViewChild("frontwheel") public frontWheel?: ElementRef<SVGSVGElement>;
 
+
+  @ViewChild('minecartSvg') public minecartSvg?: ElementRef<SVGElement>;
+  @ViewChild('minecartOverlay') public minecartOverlay?: ElementRef<HTMLDivElement>;
+  @ViewChild('minecartContainer') public minecartContainer?: ElementRef<HTMLDivElement>;
+
   addRemove : boolean;
   useImgs : boolean;
 
@@ -145,74 +150,42 @@ export class MinecartComponent implements AfterViewInit {
   
 
   // defaultGs : GameInput[] = [this.game1, this.game2, this.game3, this.game4, this.game5]
-  defaultGs : GameInput[] = [this.game2, this.game1, this.game3, this.game4, this.game5]
+  defaultGs : GameInput[] = [this.game1, this.game2, this.game3, this.game4, this.game5]
 
-  constructor(private route: ActivatedRoute) {
-    var p;
-    this.route.params.subscribe( params => p = params);
+  // constructor(private route: ActivatedRoute) {
+  //   var p;
+  //   this.route.params.subscribe( params => p = params);
 
-    this.addRemove = (p.addRemove == "addRemove") ? true : false
-    this.useImgs = (p.useImgs == "imgs" || p.useImgs ==  null) ? true : false
+  //   this.addRemove = (p.addRemove == "addRemove") ? true : false
+  //   this.useImgs = (p.useImgs == "imgs" || p.useImgs ==  null) ? true : false
 
-    if(p.gameNum == "g1") this.gs = [this.game1]
-    else if(p.gameNum == "g2") this.gs = [this.game2]
-    else if(p.gameNum == "g3") this.gs = [this.game3]
-    else if(p.gameNum == "g4") this.gs = [this.game4]
-    else if(p.gameNum == "g5") this.gs = [this.game5]
-    else if (p.gameNum == "activity1") this.gs = [this.game6, this.game7, this.game8, this.game9, this.game10]
-    else if (p.gameNum == "activity2") this.gs = [this.game11, this.game12, this.game13, this.game9, this.game14]
-    else if (p.gameNum == "a2g3") this.gs = [this.game13]
-    else if (p.gameNum == "a2g4") this.gs = [this.game9]
-    else if (p.gameNum == "a2g5") this.gs = [this.game14]
-    else this.g = null
+  //   if(p.gameNum == "g1") this.gs = [this.game1]
+  //   else if(p.gameNum == "g2") this.gs = [this.game2]
+  //   else if(p.gameNum == "g3") this.gs = [this.game3]
+  //   else if(p.gameNum == "g4") this.gs = [this.game4]
+  //   else if(p.gameNum == "g5") this.gs = [this.game5]
+  //   else if (p.gameNum == "activity1") this.gs = [this.game6, this.game7, this.game8, this.game9, this.game10]
+  //   else if (p.gameNum == "activity2") this.gs = [this.game11, this.game12, this.game13, this.game9, this.game14]
+  //   else if (p.gameNum == "a2g3") this.gs = [this.game13]
+  //   else if (p.gameNum == "a2g4") this.gs = [this.game9]
+  //   else if (p.gameNum == "a2g5") this.gs = [this.game14]
+  //   else this.g = null
 
-    if (p.max == null && p.min == null) {
-      this.scrollMax = 5
-      this.scrollMin = -5
-    }
-    else {
-      this.scrollMax = (isNaN(Number(p.max))) ? 0 : Number(p.max)
-      this.scrollMin = (isNaN(Number(p.min))) ? 0 : Number(p.min)
-    }
+  //   if (p.max == null && p.min == null) {
+  //     this.scrollMax = 5
+  //     this.scrollMin = -5
+  //   }
+  //   else {
+  //     this.scrollMax = (isNaN(Number(p.max))) ? 0 : Number(p.max)
+  //     this.scrollMin = (isNaN(Number(p.min))) ? 0 : Number(p.min)
+  //   }
 
-  }
+  // }
+
+  constructor() {}
 
   ngAfterViewInit(): void {
     
-    // const game1 = {
-    //   startBalloons : 2,
-    //   startSandbags : 3,
-    //   goal : 1,
-      
-    // } as GameInput
-
-    // const game2 = {
-    //   startBalloons : 2,
-    //   startSandbags : 0,
-    //   goal : -5,
-      
-    // } as GameInput
-
-    // const game3 = {
-    //   startBalloons : 1,
-    //   startSandbags : 2,
-    //   goal : 2,
-      
-    // } as GameInput
-
-    // const game4 = {
-    //   startBalloons : 0,
-    //   startSandbags : 0,
-    //   goal : 4,
-      
-    // } as GameInput
-
-    // const game5 = {
-    //   startBalloons : 4,
-    //   startSandbags : 1,
-    //   goal : -3,
-      
-    // } as GameInput
     
     const setup = {
       arena : this.arena.nativeElement, 
@@ -234,9 +207,13 @@ export class MinecartComponent implements AfterViewInit {
       
 
       addRemove : this.addRemove,
-      useImgs : this.useImgs,
-      scrollbarRangeMax : this.scrollMax, //5,
-      scrollbarRangeMin : this.scrollMin //-5,
+      useImgs : true,
+      scrollbarRangeMax : 5,
+      scrollbarRangeMin : -5,
+
+      minecartOverlay: this.minecartOverlay?.nativeElement,
+      minecartSvg: this.minecartSvg?.nativeElement,
+      minecartContainer: this.minecartContainer?.nativeElement
 
     } as InputSetup
     

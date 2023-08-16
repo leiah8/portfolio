@@ -32,3 +32,30 @@ svg {
     left: 94vw;  
     position: absolute;
   }
+
+
+  .rotateImg {
+    width : 100vw;
+    height : auto;
+
+    margin: 0;
+    position: absolute;
+    top: 20%;
+    
+
+}
+
+.mobile {
+    display : none;
+}
+
+
+
+@media only screen and (max-width: 480px) {
+    .mobile {
+      display: block;
+    }
+    .not-mobile {
+      display: none;
+    }
+}

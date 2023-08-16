@@ -64,7 +64,7 @@ export class MaterialBridgeAPI {
     nextBtn: HTMLElement;
     boat: HTMLElement;
 
-    usability : HTMLElement;
+    // usability : HTMLElement;
 
     frontWater: HTMLElement;
     lightning: HTMLElement;
@@ -135,7 +135,7 @@ export class MaterialBridgeAPI {
 
         this.fallingBlocks = []
 
-        this.usability = setup.usability
+        // this.usability = setup.usability
         this.helpBtn = setup.helpBtn
         this.help = setup.help
 
@@ -180,10 +180,10 @@ export class MaterialBridgeAPI {
         this.setupTargets()
         this.setupButtons()
 
-        if(this.help)
-            this.setupUsability()
-        else
-            gsap.set([this.usability, this.helpBtn], {visibility : "hidden"})
+        // if(this.help)
+        //     this.setupUsability()
+        // else
+        //     gsap.set([this.usability, this.helpBtn], {visibility : "hidden"})
 
         this.startAnimation();
     }
@@ -1008,64 +1008,64 @@ export class MaterialBridgeAPI {
 
     //usability functions 
 
-    setupUsability() {
-        var self = this
-        //add pointer 
+    // setupUsability() {
+    //     var self = this
+    //     //add pointer 
 
-        this.pointer = document.createElementNS(svgns, "use")
-        this.pointer.setAttribute("href", "#pointer")
-        this.usability.appendChild(this.pointer)
+    //     this.pointer = document.createElementNS(svgns, "use")
+    //     this.pointer.setAttribute("href", "#pointer")
+    //     this.usability.appendChild(this.pointer)
 
-        gsap.set(this.usability, {visibility : "hidden"})
-        gsap.set(this.pointer, {transformOrigin : "0% 100%", x : 0, y : 0})
+    //     gsap.set(this.usability, {visibility : "hidden"})
+    //     gsap.set(this.pointer, {transformOrigin : "0% 100%", x : 0, y : 0})
 
-        //setup btn 
+    //     //setup btn 
 
-        this.helpBtn.onpointerdown = function() {
-            if (!self.tl.isActive())
-                self.pointTo(90,493, self.smallBoat)
-        }
+    //     this.helpBtn.onpointerdown = function() {
+    //         if (!self.tl.isActive())
+    //             self.pointTo(90,493, self.smallBoat)
+    //     }
 
-    }
+    // }
 
-    pointTo(x, y, el) {
-        var self = this
-        gsap.set(this.usability, {visibility : "visible"})
+    // pointTo(x, y, el) {
+    //     var self = this
+    //     gsap.set(this.usability, {visibility : "visible"})
 
-        this.tl.pause()
-        var tempT = gsap.timeline() 
+    //     this.tl.pause()
+    //     var tempT = gsap.timeline() 
 
-        var w = 80
-        var dist = Math.sqrt(x**2 + y**2)
+    //     var w = 80
+    //     var dist = Math.sqrt(x**2 + y**2)
 
-        if(el != null) {
-            const clone = el.cloneNode(true)
-            this.usability.appendChild(clone)
-        }
-
-
-        var c = document.createElementNS(svgns, "circle")
-        this.usability.appendChild(c)
-        gsap.set(c, {attr : {cx : x, cy : y, r : 0}, stroke : "#fff", fillOpacity : 0})
-
-        this.usability.appendChild(this.pointer)
-
-        tempT.to(this.pointer, {duration : dist*(1.2/500), x : x - 0.24*w, y : y+ 0.02*w, ease : "bounce"})
-        tempT.to(this.pointer, {duration : 0.15, scaleY : 1.1, ease : "bounce"})
-        tempT.to(this.pointer, {duration : 0.15, scaleX : 0.8, ease : "bounce"}, "<")
-        //start circles
-        tempT.to(c, {attr : {r : 50}, alpha : 0}) 
-        tempT.to(this.pointer, {duration : 1.2, scaleX : 1, ease : "elastic"})
-        tempT.to(this.pointer, {duration : 1.2, scaleY : 1, ease : "elastic"}, "<")
-
-        tempT.to(this.pointer, {duration : 0.5, onComplete : function() {
-            //end 
-            gsap.set(self.usability, {visibility : "hidden"})
-            gsap.set(self.pointer, {x : 0, y : 0})
-            self.usability.removeChild(c)
-            self.tl.play()
-        }})
+    //     if(el != null) {
+    //         const clone = el.cloneNode(true)
+    //         this.usability.appendChild(clone)
+    //     }
 
 
-    }
+    //     var c = document.createElementNS(svgns, "circle")
+    //     this.usability.appendChild(c)
+    //     gsap.set(c, {attr : {cx : x, cy : y, r : 0}, stroke : "#fff", fillOpacity : 0})
+
+    //     this.usability.appendChild(this.pointer)
+
+    //     tempT.to(this.pointer, {duration : dist*(1.2/500), x : x - 0.24*w, y : y+ 0.02*w, ease : "bounce"})
+    //     tempT.to(this.pointer, {duration : 0.15, scaleY : 1.1, ease : "bounce"})
+    //     tempT.to(this.pointer, {duration : 0.15, scaleX : 0.8, ease : "bounce"}, "<")
+    //     //start circles
+    //     tempT.to(c, {attr : {r : 50}, alpha : 0}) 
+    //     tempT.to(this.pointer, {duration : 1.2, scaleX : 1, ease : "elastic"})
+    //     tempT.to(this.pointer, {duration : 1.2, scaleY : 1, ease : "elastic"}, "<")
+
+    //     tempT.to(this.pointer, {duration : 0.5, onComplete : function() {
+    //         //end 
+    //         gsap.set(self.usability, {visibility : "hidden"})
+    //         gsap.set(self.pointer, {x : 0, y : 0})
+    //         self.usability.removeChild(c)
+    //         self.tl.play()
+    //     }})
+
+
+    // }
 }

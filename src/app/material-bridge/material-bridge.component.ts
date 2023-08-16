@@ -22,8 +22,8 @@ export class MaterialBridgeComponent implements AfterViewInit {
   @ViewChild("frontWater") public frontWater?: ElementRef<HTMLElement>;
   @ViewChild("lightning") public lightning?: ElementRef<HTMLElement>;
 
-  @ViewChild("usability") public usability?: ElementRef<HTMLElement>;
-  @ViewChild("helpBtn") public helpBtn?: ElementRef<HTMLElement>;
+  // @ViewChild("usability") public usability?: ElementRef<HTMLElement>;
+  // @ViewChild("helpBtn") public helpBtn?: ElementRef<HTMLElement>;
 
   help : boolean
   games : GameInput[]
@@ -95,8 +95,8 @@ export class MaterialBridgeComponent implements AfterViewInit {
       frontWater : this.frontWater.nativeElement,
       lightning : this.lightning.nativeElement,
 
-      usability : this.usability.nativeElement,
-      helpBtn : this.helpBtn.nativeElement,
+      // usability : this.usability.nativeElement,
+      // helpBtn : this.helpBtn.nativeElement,
 
       help : this.help
 

@@ -45,7 +45,7 @@ h1 {
     font-family : 'Yeseva One';
     font-weight : normal;
     font-size : 42px;
-    padding-top : 5vh;
+    padding-top : max(5vh, 50px);
     padding-bottom : 2%;
 
     text-align : center;
@@ -181,6 +181,7 @@ button:hover {
 .job {
     /* width : min(20vw, 350px);  */
     width : 80%;
+    /* height : max(15vh, fit-content); */
     height : 15vh;
     border-radius : 2vw;
 
@@ -357,7 +358,8 @@ button:hover {
 
     .job {
         width : 25vw;
-        height : 15vh;
+        /* height : max(15vh, fit-content); */
+        height : 100%;
         margin : 5px;
 
         font-size : 2.2vw
@@ -371,6 +373,7 @@ button:hover {
     .column {
         grid-template-rows : 1fr;
         grid-template-columns : 3fr 3fr 3fr;
+        padding-bottom : 10px
     } 
     
     /* drop down*/

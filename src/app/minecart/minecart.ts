@@ -2,11 +2,6 @@ import { gsap, Draggable, Power1, Elastic } from "gsap/all";
 import { CustomEase } from "gsap/CustomEase.js";
 import {svgns} from "../api"
 
-//TO DO: figure out why GSAP target not found AFTER 
-//move on to second game AND
-//cause by next button, restart button and the very first update platform 
-//but no errors shown
-
 export interface InputSetup {
   arena : HTMLElement,
   platform : SVGSVGElement,
@@ -29,6 +24,10 @@ export interface InputSetup {
   useImgs : boolean,
   scrollbarRangeMax : number,
   scrollbarRangeMin : number,
+
+  minecartSvg: SVGElement;
+  minecartContainer: HTMLDivElement;
+  minecartOverlay: HTMLDivElement;
 }
 
 interface Node extends HTMLElement{
@@ -71,6 +70,10 @@ export class IntegerPlatfromClass {
     equation : HTMLElement;
     balloonURL : string = "https://res.cloudinary.com/dxltpgop9/image/upload/v1683303439/minecart/integer-platform-balloon_wmfqfh.svg";
     sandbagURL : string = "https://res.cloudinary.com/dxltpgop9/image/upload/v1683303439/minecart/integer-platform-sandbag_zdtxyg.svg";
+
+
+    minecartContainer: HTMLDivElement;
+    overlay : HTMLDivElement
     
     numbers : HTMLElement;
     plusBtn : HTMLElement;
@@ -100,11 +103,23 @@ export class IntegerPlatfromClass {
     minusTxt : SVGSVGElement;
     wheelCircumference : number;
     cartXPos : number;
+
+    //to do: fix styles!!
     
-    DEFAULT_NODE_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 8px; font-size : 20px; font-family : 'Poppins'; color:#000"
-    SELECTED_NODE_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #23a3ff; border-radius: 8px; font-size : 20px; font-family : 'Poppins'; color:#fff"
-    DEFAULT_TERM_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 8vh; font-size : 20px; font-family : 'Poppins'; color:#000; padding-bottom : 0.3vh"
-    SELECTED_TERM_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #23a3ff; border-radius: 8vh; font-size : 20px; font-family : 'Poppins'; color:#fff; padding-bottom : 0.3vh"
+    DEFAULT_NODE_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 20px; font-size : 150%; font-family : 'Poppins'; color:#000"
+    SELECTED_NODE_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #23a3ff; border-radius: 20px; font-size : 150%; font-family : 'Poppins'; color:#fff"
+    /**
+     * DEFAULT_NODE_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 3vh; font-size : 3vh; font-family : 'Poppins'; color:#000"
+    SELECTED_NODE_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #23a3ff; border-radius: 3vh; font-size : 3vh; font-family : 'Poppins'; color:#fff"
+    DEFAULT_TERM_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 8vh; font-size : 3vh; font-family : 'Poppins'; color:#000; padding-bottom : 0.3vh"
+    SELECTED_TERM_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #23a3ff; border-radius: 8vh; font-size : 3vh; font-family : 'Poppins'; color:#fff; padding-bottom : 0.3vh"
+
+     */
+
+    
+    
+    DEFAULT_TERM_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #fff; border-radius: 40px; font-size : 150%; font-family : 'Poppins'; color:#000; height:100%;"
+    SELECTED_TERM_STYLE : string = "scroll-snap-align: center; display: flex; justify-content: center; align-items: center; background: #23a3ff; border-radius: 40px; font-size : 150%; font-family : 'Poppins'; color:#fff; height:100%"
 
     selectedTerm : Term;
     allTerms : Term[]
@@ -124,6 +139,7 @@ export class IntegerPlatfromClass {
     canReset : boolean;
     cartOnPlatform : boolean;
     editing : boolean
+    groundLevel : number;
 
     addRemove : boolean;
     useImgs : boolean;
@@ -138,9 +154,16 @@ export class IntegerPlatfromClass {
     sandbagX : number;
     ITEM_START_X : number = 455;
     ITEM_START_Y : number = 202;
+    balloonYDiff : number;
+    sandbagYDiff : number;
     ADDITIONAL_SANDBAG_Y : number = 151;
     BALLOON_DURATION : number = 1;
     SANDBAG_DURATION : number = 0.7;
+
+    CART_X_DIFF : number = 590;
+    CART_Y_DIFF : number = 350;
+
+    sparkle : SVGUseElement
 
     constructor(setup, gameInputs) {
         this.games = []
@@ -167,6 +190,8 @@ export class IntegerPlatfromClass {
         this.cover = setup.cover
         this.plusTxt = setup.plusTxt
         this.minusTxt = setup.minusTxt
+        this.overlay = setup.minecartOverlay
+        this.minecartContainer = setup.mineCartContainer
 
         this.sum = 0
         this.pos = this.sum*50 
@@ -194,10 +219,14 @@ export class IntegerPlatfromClass {
         this.useImgs = setup.useImgs
         this.scrollbarRangeMax = setup.scrollbarRangeMax
         this.scrollbarRangeMin = setup.scrollbarRangeMin
+        this.groundLevel = 0;
 
-        gsap.registerPlugin(CustomEase);
-        this.sandbagBounce = CustomEase.create("sandbagBounce", "M0,0 C0,0 0.014,0.001 0.022,0.003 0.031,0.006 0.037,0.01 0.045,0.015 0.054,0.021 0.06,0.027 0.068,0.035 0.077,0.044 0.083,0.05 0.09,0.061 0.108,0.089 0.12,0.107 0.135,0.137 0.155,0.179 0.165,0.205 0.181,0.249 0.201,0.305 0.211,0.336 0.228,0.394 0.247,0.46 0.256,0.497 0.273,0.565 0.292,0.644 0.301,0.686 0.318,0.766 0.337,0.858 0.359,0.98 0.363,0.998 0.367,0.989 0.39,0.949 0.411,0.907 0.426,0.877 0.438,0.859 0.456,0.831 0.464,0.82 0.47,0.813 0.48,0.804 0.487,0.796 0.492,0.792 0.501,0.786 0.509,0.781 0.515,0.778 0.524,0.775 0.531,0.772 0.538,0.771 0.546,0.772 0.554,0.772 0.561,0.773 0.569,0.776 0.578,0.779 0.584,0.783 0.592,0.788 0.601,0.794 0.606,0.799 0.614,0.807 0.623,0.817 0.629,0.824 0.637,0.836 0.655,0.864 0.667,0.882 0.682,0.914 0.701,0.953 0.72,0.982 0.726,0.998 0.73,0.994 0.743,0.979 0.754,0.968 0.761,0.961 0.766,0.957 0.774,0.952 0.782,0.947 0.788,0.943 0.796,0.941 0.804,0.938 0.811,0.937 0.819,0.937 0.827,0.937 0.833,0.938 0.841,0.941 0.85,0.944 0.855,0.947 0.863,0.952 0.872,0.958 0.877,0.963 0.885,0.971 0.894,0.981 0.902,0.992 0.908,0.998 0.914,0.996 1,1 1,1 ")
-        
+        this.balloonYDiff = 0;
+        this.sandbagYDiff = 0;
+
+        // gsap.registerPlugin(CustomEase);
+        // this.sandbagBounce = CustomEase.create("sandbagBounce", "M0,0 C0,0 0.014,0.001 0.022,0.003 0.031,0.006 0.037,0.01 0.045,0.015 0.054,0.021 0.06,0.027 0.068,0.035 0.077,0.044 0.083,0.05 0.09,0.061 0.108,0.089 0.12,0.107 0.135,0.137 0.155,0.179 0.165,0.205 0.181,0.249 0.201,0.305 0.211,0.336 0.228,0.394 0.247,0.46 0.256,0.497 0.273,0.565 0.292,0.644 0.301,0.686 0.318,0.766 0.337,0.858 0.359,0.98 0.363,0.998 0.367,0.989 0.39,0.949 0.411,0.907 0.426,0.877 0.438,0.859 0.456,0.831 0.464,0.82 0.47,0.813 0.48,0.804 0.487,0.796 0.492,0.792 0.501,0.786 0.509,0.781 0.515,0.778 0.524,0.775 0.531,0.772 0.538,0.771 0.546,0.772 0.554,0.772 0.561,0.773 0.569,0.776 0.578,0.779 0.584,0.783 0.592,0.788 0.601,0.794 0.606,0.799 0.614,0.807 0.623,0.817 0.629,0.824 0.637,0.836 0.655,0.864 0.667,0.882 0.682,0.914 0.701,0.953 0.72,0.982 0.726,0.998 0.73,0.994 0.743,0.979 0.754,0.968 0.761,0.961 0.766,0.957 0.774,0.952 0.782,0.947 0.788,0.943 0.796,0.941 0.804,0.938 0.811,0.937 0.819,0.937 0.827,0.937 0.833,0.938 0.841,0.941 0.85,0.944 0.855,0.947 0.863,0.952 0.872,0.958 0.877,0.963 0.885,0.971 0.894,0.981 0.902,0.992 0.908,0.998 0.914,0.996 1,1 1,1 ")
+
         this.setupEls()
 
     }
@@ -230,19 +259,36 @@ export class IntegerPlatfromClass {
 
       //bridge or tunnel
       if (self.game.goal < 0) {
+        // var rect = document.createElementNS(svgns, "use")
+        // this.arena.appendChild(rect)
+        // rect.setAttribute("href", "#dirt")
+        // gsap.set(rect, {x : 830, y : 450, scaleY : -self.game.goal -3.5})
+        // this.levelEls.push(rect)
+
         var tunnel = document.createElementNS(svgns,"use")
         this.arena.appendChild(tunnel)
-        tunnel.setAttribute("href","#tunnel")
-        gsap.set(tunnel, {x : 830, y : 400 + -self.game.goal*50 - 125})
+        // tunnel.setAttribute("href","#tunnel")
+        // gsap.set(tunnel, {x : 830, y : 400 + -self.game.goal*50 - 125})
         this.levelEls.push(tunnel)
 
-        //to do: add brown rect
+        //move up the ground 
+        if (self.game.goal == -1) {
+            tunnel.setAttribute("href", "#grasstunnel")
+            gsap.set(tunnel, {x : 830, y : 400 - 100 - 22})
+            self.groundLevel = 2
+          }
+        else if (self.game.goal == -2) {
+          tunnel.setAttribute("href", "#grasstunnel")
+          gsap.set(tunnel, {x : 830, y : 400 - 50 - 22})
+          self.groundLevel = 1
 
-        var rect = document.createElementNS(svgns, "use")
-        this.arena.appendChild(rect)
-        rect.setAttribute("href", "#dirt")
-        gsap.set(rect, {x : 830, y : 450, scaleY : -self.game.goal -3.5})
-        this.levelEls.push(rect)
+        }
+        else {
+          tunnel.setAttribute("href","#tunnel")
+          gsap.set(tunnel, {x : 830, y : 400 + -self.game.goal*50 - 125})
+          self.groundLevel = 0
+
+        }
 
       }
       else if (self.game.goal == 1) {
@@ -272,8 +318,8 @@ export class IntegerPlatfromClass {
       gsap.set(self.spring, {x : 550, y : 410 - self.game.start*50, height : 300 - self.game.start*50})
 
       //cart
-      gsap.set(self.cart, {x : -200, y : 300 + self.game.start*50})
-      this.cartXPos = 640 - 74
+      gsap.set(self.cart, {x : -200 + self.CART_X_DIFF, y : 300 + self.game.start*50 + self.CART_Y_DIFF})
+      this.cartXPos = 640 - 74 //to do: adjust here
 
       try {this.arena.removeChild(self.gem)} catch {}
       
@@ -326,7 +372,7 @@ export class IntegerPlatfromClass {
         this.playBtn = playBtn
 
         playBtn.onpointerdown = function(e) {
-            if(self.canPlay) {
+          if(self.canPlay) {
               self.canEdit = false
               self.canReset = false
               self.canPlay = false
@@ -355,8 +401,8 @@ export class IntegerPlatfromClass {
         //add button
         var addBtn = document.createElementNS(svgns,"use")
         this.controls.appendChild(addBtn)
-        addBtn.setAttribute("href","#addBtn")
-        gsap.set(addBtn, {x : 840, y : 10})
+        addBtn.setAttribute("href","#editBtn")
+        gsap.set(addBtn, {x : 840, y : 25})
         gsap.set(addBtn, {transformOrigin : "35px 35px"})
         this.addBtn = addBtn
 
@@ -426,7 +472,7 @@ export class IntegerPlatfromClass {
 
     highlightEdit() {
       var self = this
-      if(!self.editing && self.canEdit) {
+      if(!self.editing && self.canEdit && self.allTerms.length == 0) {
         //highlight edit button
         self.tl.to(self.addBtn, {scale : 1.5, duration : 0.25})
         self.tl.to(self.addBtn, {scale : 1, ease : "bounce", duration : 0.5})
@@ -476,22 +522,31 @@ export class IntegerPlatfromClass {
       self.sandbags = []
 
       //reset cart  (to outside of screen)
-      gsap.set(self.cart, {x : -200, y : 300 + self.game.start*50})
+      gsap.set(self.cart, {x : -200 + self.CART_X_DIFF, y : 300 + self.game.start*50 + self.CART_Y_DIFF})
       gsap.set([self.backWheel, self.frontWheel], {rotation : 0})
 
       //reset terms 
       self.allTerms.forEach(term => { self.terms.removeChild(term) })
       self.allTerms = []
 
+      this.sandbagYDiff = 0;
+      this.balloonYDiff = 0;
+
       
       gsap.set(self.gem, {x : self.gemPos +26, y : 400 + -self.game.goal*50 - 50})
 
+      try {
+        this.arena.removeChild(this.sparkle)
+      } catch {
+
+      }
     }
     
     playAnimation() {
       var self = this
       this.game.attempts += 1
       this.dragEl[0].disable()
+      self.finished = true;
       
       try {
         self.allTerms.forEach(term => {
@@ -501,33 +556,53 @@ export class IntegerPlatfromClass {
           //add balloons or sandbags
           //TO DO: format balloons and sandbags so more than 8 are allowed 
           if(term.positive) {
-            if (term.val > 0 && this.balloons.length+term.val <= 8) {
+            if (term.val > 0) {
               for(var i = 0; i < Math.abs(term.val); i++) {
                 var temp = document.createElementNS(svgns,"use")
                 self.platform.appendChild(temp)
                 temp.setAttribute("href","#balloon")
-
-                self.balloonX += 50
-                gsap.set(temp, {x : self.balloonX, y : self.ITEM_START_Y + 600, visibility : "hidden"})
-                
                 elements.push(temp)
                 self.balloons.push(temp)
+
+                //to do : here
+                gsap.set(temp, {x : self.balloonX, y : self.ITEM_START_Y + 600 - self.balloonYDiff, visibility : "hidden"})
+
+                self.balloonX += 50
+                if (self.balloonX >= self.ITEM_START_X + 50*7) {
+                  self.balloonYDiff += 20 //to do: change val?
+                  self.balloonX = self.ITEM_START_X
+                }
+
+                // gsap.set(temp, {x : self.balloonX, y : self.ITEM_START_Y + 600 - self.itemYDiff, visibility : "hidden"})
+                
+                
               }
-              self.tl.to(elements, {y : self.ITEM_START_Y, visibility : "visible", duration : self.BALLOON_DURATION})
+              // self.tl.to(elements, {y : self.ITEM_START_Y - self.itemYDiff, visibility : "visible", duration : self.BALLOON_DURATION})
+              self.tl.to(elements, {y : "-=" + 600, visibility : "visible", duration : self.BALLOON_DURATION})
             }
-            else if (term.val < 0 && this.sandbags.length + Math.abs(term.val) <= 8) {
+            else if (term.val < 0) {
               for(var i = 0; i < Math.abs(term.val); i++) {
                 var temp = document.createElementNS(svgns,"use")
                 self.platform.appendChild(temp)
                 temp.setAttribute("href","#sandbag")
-
-                self.sandbagX += 50
-                gsap.set(temp, {x : self.sandbagX, y : self.ITEM_START_Y - 400, visibility : "hidden"})
-
                 elements.push(temp)
                 self.sandbags.push(temp)
+
+                gsap.set(temp, {x : self.sandbagX, y : self.ITEM_START_Y - 400 - self.sandbagYDiff, visibility : "hidden"})
+
+                self.sandbagX += 50
+                if (self.sandbagX >= self.ITEM_START_X + 50*7) {
+                  //self.itemYDiff += 20 //to do: change val?
+                  self.sandbagYDiff += 20
+                  self.sandbagX = self.ITEM_START_X
+                }
+                //gsap.set(temp, {x : self.sandbagX, y : self.ITEM_START_Y - 400, visibility : "hidden"})
+
+                
               }
-              self.tl.to(elements, {y : self.ITEM_START_Y + self.ADDITIONAL_SANDBAG_Y, ease : "linear", visibility : "visible", duration : self.SANDBAG_DURATION})
+              // self.tl.to(elements, {y : self.ITEM_START_Y + self.ADDITIONAL_SANDBAG_Y, ease : "linear", visibility : "visible", duration : self.SANDBAG_DURATION})
+              self.tl.to(elements, {y : "+= " + (400 + self.ADDITIONAL_SANDBAG_Y), ease : "linear", visibility : "visible", duration : self.SANDBAG_DURATION})
+            
             }
             else {
               self.tl.to(term, {background : "red"})
@@ -586,19 +661,19 @@ export class IntegerPlatfromClass {
         //feedback animation
         if(self.sum == self.game.goal) { //cart rolls off 
           self.game.completed = true
-          self.tl.to(self.cart, {x : 830, duration : 0.8, ease : "linear"})
-          self.tl.to([self.backWheel, self.frontWheel], {rotation : "+=" + (830 - self.cartXPos) / self.wheelCircumference * 360, duration : 0.8, ease: "linear", 
+          self.tl.to(self.cart, {x : 830 + self.CART_X_DIFF, duration : 0.8, ease : "linear"})
+          self.tl.to([self.backWheel, self.frontWheel], {rotation : "+=" + (830 - self.cartXPos + self.CART_X_DIFF) / self.wheelCircumference * 360, duration : 0.8, ease: "linear", 
             onComplete : function() {
               self.cartOnPlatform = false
               self.sum += 1
               self.updatePlatformPos()
               
               var time = ((self.gemPos - 830) / 264)*0.8
-              self.tl.to(self.cart, {x : self.gemPos, duration : time, ease : "linear"}, "<")
+              self.tl.to(self.cart, {x : self.gemPos + self.CART_X_DIFF, duration : time, ease : "linear"}, "<")
               self.tl.to([self.backWheel, self.frontWheel], {rotation : "+=" + (self.gemPos - 830) / self.wheelCircumference * 360, duration : time, ease: "linear"}, "<") 
               
               time = ((1400 - self.gemPos) / 264)*0.8
-              self.tl.to(self.cart, {x : 1400, duration : time, ease : "linear", 
+              self.tl.to(self.cart, {x : 1400  + self.CART_X_DIFF  , duration : time, ease : "linear", 
                 onStart : function() {
                   gsap.set(self.gem, {y : "-="+75})
                 }, 
@@ -612,13 +687,14 @@ export class IntegerPlatfromClass {
         }
 
         //too low -> hit the ground
-        else if (self.sum < 0 || self.sum < self.game.goal) { 
+        // else if (self.sum < 0 || self.sum < self.game.goal) { 
+          else if (self.sum < self.groundLevel || self.sum < self.game.goal) { 
           //TO DO: adjust cart width = 148
-          self.tl.to(self.cart, {x : 830 - 148, ease: Power1.easeIn, duration : 0.75})
-          self.tl.to([self.backWheel, self.frontWheel], {rotation : "+=" + ((830 - 148 - self.cartXPos) / self.wheelCircumference * 360), duration : 0.75, ease: Power1.easeIn}, "<")
+          self.tl.to(self.cart, {x : 830 - 148  + self.CART_X_DIFF, ease: Power1.easeIn, duration : 0.75})
+          self.tl.to([self.backWheel, self.frontWheel], {rotation : "+=" + ((830 - 148 - self.cartXPos + self.CART_X_DIFF) / self.wheelCircumference * 360), duration : 0.75, ease: Power1.easeIn}, "<")
           
-          self.tl.to(self.cart, {x : self.cartXPos, ease: Power1.easeOut, duration : 1})
-          self.tl.to([self.backWheel, self.frontWheel], {rotation : "-=" + ((830 - 148 - self.cartXPos) / self.wheelCircumference * 360), duration : 1, ease: Power1.easeOut}, "<")
+          self.tl.to(self.cart, {x : self.cartXPos  + self.CART_X_DIFF, ease: Power1.easeOut, duration : 1})
+          self.tl.to([self.backWheel, self.frontWheel], {rotation : "-=" + ((830 - 148 - self.cartXPos + self.CART_X_DIFF) / self.wheelCircumference * 360), duration : 1, ease: Power1.easeOut}, "<")
         }
 
         //too high -> wiggle platform
@@ -661,13 +737,16 @@ export class IntegerPlatfromClass {
 
     moveGemWithCart(self) {
       const xVal = Math.round(Number(gsap.getProperty(self.cart, "x")));
-      gsap.set(self.gem, {x : xVal + 20})
+      gsap.set(self.gem, {x : xVal + 20 - self.CART_X_DIFF})
     }
 
     openInput() {
         var self = this
         this.editing = true;
         this.canReset = false
+        //https://res.cloudinary.com/dxltpgop9/image/upload/v1683837962/minecart/integer-platform-plus_pleui4.svg
+        this.addBtn.setAttribute("href","#addBtn")
+        gsap.set(self.addBtn, {})
         this.setPlusBtn()
         gsap.set([self.cover, self.inputBtns, self.inputNums], {visibility : "visible"})
         self.canEdit = false;
@@ -678,6 +757,7 @@ export class IntegerPlatfromClass {
         this.editing = false;
         this.canPlay = true
         this.canReset = true
+        this.addBtn.setAttribute("href","#editBtn")
         gsap.set([self.cover, self.inputBtns, self.inputNums], {visibility : "hidden"})
         
         //remove empty terms (for some reason needs to run twice)
@@ -763,6 +843,7 @@ export class IntegerPlatfromClass {
             self.selectedNode = self.selectedTerm.node 
             self.selectedNode.setAttribute("style", self.SELECTED_NODE_STYLE )
             self.selectedNode.on = true
+            self.setScrollVal(self.selectedTerm.node)
           }
           else {
             self.selectedNode = null
@@ -776,25 +857,55 @@ export class IntegerPlatfromClass {
   
       }
 
+    // adjustEquationWidth() {
+    //   var self = this
+    //   var h = (this.arena as any as HTMLElement).getBoundingClientRect().height
+    //   var w = h*(1280/720) //(this.arena as any as HTMLElement).getBoundingClientRect().width 
+    //   var x = w*(840/1280)  //(this.addBtn as any as HTMLElement).getBoundingClientRect().x 
+    //   var btnW = w * (70 / 1280) //(addBtn as any as HTMLElement).getBoundingClientRect().width
+
+    //   var equationW = Math.min(Math.max((0.18*h + 10), self.allTerms.length*(0.18*h + 10)), 3*(0.18*h + 10))
+    //   var eX = (100 - (equationW / 1280)*100).toString() + "vh"
+    //   // gsap.set(this.equation, {width : equationW, x : x - equationW - btnW, y : "1.5vh"})
+    //   gsap.set(this.equation, {transformOrigin : "top right"})
+    //   gsap.set(this.equation, {width : equationW, x : eX, y : "1.5vh"})
+
+    // }
+
     adjustEquationWidth() {
       var self = this
-      var h = (this.arena as any as HTMLElement).getBoundingClientRect().height 
-      var w = h*(1280/720) //(this.arena as any as HTMLElement).getBoundingClientRect().width 
-      var x = w*(840/1280)  //(this.addBtn as any as HTMLElement).getBoundingClientRect().x 
-      var btnW = w * (120 / 1280) //(addBtn as any as HTMLElement).getBoundingClientRect().width
+      // var h = (this.arena as any as HTMLElement).getBoundingClientRect().height 
+      // var w = h*(1280/720) //(this.arena as any as HTMLElement).getBoundingClientRect().width 
+      // var x = (this.addBtn as any as HTMLElement).getBoundingClientRect().x //w*(840/1280)
+      // var btnW = w * (70 / 1280) //(addBtn as any as HTMLElement).getBoundingClientRect().width
 
-      var equationW = Math.min(Math.max((0.18*h + 10), self.allTerms.length*(0.18*h + 10)), 5*(0.18*h + 10))
-      gsap.set(this.equation, {width : equationW, x : x - equationW - btnW - 10, y : "1.5vh"})
+      gsap.set(this.equation, {transformOrigin : "0% 100%"})
 
-      console.log(x, equationW, btnW)
+      var termW = 180 //px
+      var equationW = Math.min(Math.max((termW), self.allTerms.length*(termW)), 3*(termW))
+      // gsap.set(this.equation, {width : equationW, x : x - equationW - btnW/2, y : "10px"}) //to do: fix 
+
+      gsap.set(this.equation, {width : equationW, x : 650 -equationW, y : "10px"}) //to do: fix 
+
     }
 
     onResize(addBtn) {
       this.adjustEquationWidth()
 
-      //input vertical scrollbar
-      gsap.set(this.inputNums, {x : "20vh", y : "25vh"})
-      gsap.set(this.inputBtns, {width : "20vh", height : "50vh", x : "-5vh", y : "25vh"})
+      // //input vertical scrollbar
+      // gsap.set(this.inputNums, {x : "20vh", y : "25vh"})
+      // gsap.set(this.inputBtns, {width : "20vh", height : "50vh", x : "-3vh", y : "25vh"})
+
+      if (this.overlay) {
+      //  const currentPuzzleWidth = this.minecartContainer.offsetWidth;
+
+        const currentPuzzleWidth = (this.arena as any as HTMLElement).getBoundingClientRect().width 
+  
+        const curScale = currentPuzzleWidth / 1280;
+        this.overlay.style.scale = curScale.toString();
+  
+        this.overlay.style.width = `${(currentPuzzleWidth * (1 / curScale))}px`;
+      }
     
     }
 
@@ -870,6 +981,7 @@ export class IntegerPlatfromClass {
         self.selectedTerm.appendChild(self.selectedTerm.txt[0]); 
         
         var s = document.createElement('img')
+        gsap.set(s, {height : "50%"})
         if (node.val > 0)  s.src = self.balloonURL
         else  s.src = self.sandbagURL
         self.selectedTerm.img = s
@@ -922,6 +1034,7 @@ export class IntegerPlatfromClass {
             if (self.useImgs) {
               n.appendChild(document.createTextNode(Math.abs(i).toString()));
               var s = document.createElement('img')
+              gsap.set(s, {height : "60%"})
               if (i > 0) s.src = this.balloonURL
               if (i < 0) s.src = this.sandbagURL
               n.appendChild(s)
@@ -979,10 +1092,14 @@ export class IntegerPlatfromClass {
             }
 
             if(!node.on) {
+              
+
               node.setAttribute("style", self.SELECTED_NODE_STYLE )
               node.on = true
     
               self.selectedNode = node
+              
+              self.setScrollVal(node)
             
               self.selectedTerm.node = node
               self.selectedTerm.val = node.val
@@ -1010,11 +1127,19 @@ export class IntegerPlatfromClass {
         }); 
     } 
 
+    setScrollVal(node) {
+      //move to top
+      var range = (this.scrollbarRangeMax > 0 && this.scrollbarRangeMin < 0) ? (this.scrollbarRangeMax - this.scrollbarRangeMin) +1: (this.scrollbarRangeMax - this.scrollbarRangeMin)+2
+      var height = this.numbers.scrollHeight / Math.abs(range)
+      this.numbers.scrollTop = height * (this.scrollbarRangeMax - node.val)
+
+    }
+
     onUpdateDrag(self) {
         const yVal = Math.round(Number(gsap.getProperty(self.platform, "y")));
         gsap.set(self.spring, {scaleY : self.getScaleVal(yVal)})
         if (self.cartOnPlatform)
-          gsap.set(self.cart, {y : 300 + yVal})
+          gsap.set(self.cart, {y : 300 + yVal  + self.CART_Y_DIFF})
     }
 
     setupDraggablePlatform() {
@@ -1029,10 +1154,10 @@ export class IntegerPlatfromClass {
             gsap.to(self.platform, {y : self.pos, ease : "elastic", duration : 1, 
                 onUpdate : self.onUpdateDrag, onUpdateParams : [self] }) 
           }
-        }) 
+        })
     }
 
-    getScaleVal(y) { return -y/300 + 1 }
+    getScaleVal(y) { return -y/330 + 1 }
 
     getPos() { return -this.sum*50 }
 
@@ -1049,15 +1174,31 @@ export class IntegerPlatfromClass {
         this.dragEl[0].disable()
         self.onResize(self.addBtn)
 
-        this.tl.to(self.spring, {transformOrigin: "bottom"})
+        this.tl.to(this.spring, {transformOrigin: "bottom"})
+        this.tl.to(this.sparkle, {transformOrigin : "center"}, "<")
+
+        //create circle
+        // var circ = document.createElementNS(svgns, "circle")
+        // this.arena.appendChild(circ)
+        // gsap.set(circ, {attr : {cx : this.gemPos + 55, cy : 400 + -self.game.goal*50 - 25, r : 0}, strokeWidth : 5, stroke : "#dbb8e6", strokeDasharray: "5,10", fillOpacity : 0})
+        this.sparkle = document.createElementNS(svgns, "use")
+        this.arena.appendChild(this.sparkle)
+        this.sparkle.setAttribute("href", "#sparkle")
+        gsap.set(this.sparkle, {scale : 0})
+        self.tl.to(this.sparkle, {transformOrigin : "center", duration : 0})
+        gsap.set(this.sparkle, {x : this.gemPos + 55, y : 400 + -self.game.goal*50 -20})
 
         //move cart and wheels
         gsap.set([self.backWheel, self.frontWheel], {rotation : 0})
-        this.tl.to(self.cart, {x : self.cartXPos, duration : 2, ease: "linear", 
+        //TO DO: add gem animation
+        this.tl.to(this.sparkle,  {scale : 6, rotate : 420,  opacity : 0, duration : 3, ease : "linear"})
+        // this.tl.to(circ,  {alpha : 0, duration : 1})
+        
+        this.tl.to(self.cart, {x : self.cartXPos  + self.CART_X_DIFF, duration : 2, ease: "linear", 
         onComplete : function() {
           self.cartOnPlatform = true;
-        }})
-        this.tl.to([self.backWheel, self.frontWheel], {rotation : (self.cartXPos + 200) / self.wheelCircumference * 360, duration : 2, ease: "linear"}, "<")
+        }}, "<1")
+        this.tl.to([self.backWheel, self.frontWheel], {rotation : (self.cartXPos + 200 + self.CART_X_DIFF) / self.wheelCircumference * 360, duration : 2, ease: "linear"}, "<")
         this.tl.to(self.cart, {duration : 0.1})
         
         //update platform position
@@ -1066,35 +1207,51 @@ export class IntegerPlatfromClass {
   
         //create start balloons and sandbags
         //TO DO: fomat balloons and sandbags so more than 8 are allowed 
+        this.balloonX = self.ITEM_START_X
         for(var i = 0; i < self.game.startBalloons; i++) {
           var temp = document.createElementNS(svgns,"use")
           this.platform.appendChild(temp)
           temp.setAttribute("href","#balloon")
 
-          gsap.set(temp, {x : self.ITEM_START_X + i * 50, y : self.ITEM_START_Y + 600, visibility : "hidden"})
+          // gsap.set(temp, {x : self.ITEM_START_X + i * 50, y : self.ITEM_START_Y + 600, visibility : "hidden"})
+          gsap.set(temp, {x : this.balloonX, y : self.ITEM_START_Y + 600 - this.balloonYDiff, visibility : "hidden"})
+          this.balloonX += 50;
+
+          if (this.balloonX > self.ITEM_START_X + 7*50) {
+            this.balloonX = self.ITEM_START_X
+            this.balloonYDiff += 20
+          }
           this.balloons.push(temp) 
         }
-        this.balloonX = self.ITEM_START_X + (self.game.startBalloons - 1)*50
-  
+        // this.balloonX = self.ITEM_START_X + (self.game.startBalloons - 1)*50
+        
+        this.sandbagX = self.ITEM_START_X
         for(var i = 0; i < self.game.startSandbags; i++) {
           var temp = document.createElementNS(svgns,"use")
           this.platform.appendChild(temp)
           temp.setAttribute("href","#sandbag")
 
-          gsap.set(temp, {x : self.ITEM_START_X + i * 50, y : self.ITEM_START_Y - 400, visibility : "hidden"})
+          // gsap.set(temp, {x : self.ITEM_START_X + i * 50, y : self.ITEM_START_Y - 400, visibility : "hidden"})
+          gsap.set(temp, {x : this.sandbagX, y : self.ITEM_START_Y - 400 - this.sandbagYDiff, visibility : "hidden"})
+          this.sandbagX += 50;
+
+          if (this.sandbagX > self.ITEM_START_X + 7*50) {
+            this.sandbagX = self.ITEM_START_X
+            this.sandbagYDiff += 20
+          }
           this.sandbags.push(temp)
         }
-        this.sandbagX = self.ITEM_START_X + (self.game.startSandbags - 1)*50
+        //this.sandbagX = self.ITEM_START_X + (self.game.startSandbags - 1)*50
         
         //add balloons and sandbags
         this.tl.to(self.balloons, {visibility : "visible", duration : 0})
         this.tl.to(self.sandbags, {visibility : "visible", duration : 0})
-        this.tl.to(self.balloons, {y : self.ITEM_START_Y, duration : self.BALLOON_DURATION, 
+        this.tl.to(self.balloons, {y : "-=" + 600, duration : self.BALLOON_DURATION, 
           onComplete : function() {
             self.sum += self.game.startBalloons
             self.updatePlatformPos()
             
-            self.tl.to(self.sandbags, {y : self.ITEM_START_Y + self.ADDITIONAL_SANDBAG_Y, ease : "linear", duration : self.SANDBAG_DURATION,
+            self.tl.to(self.sandbags, {y : "+=" + (400+self.ADDITIONAL_SANDBAG_Y), ease : "linear", duration : self.SANDBAG_DURATION,
               onComplete : function() {
                 self.sum -= self.game.startSandbags
                 self.updatePlatformPos()
@@ -1112,15 +1269,15 @@ export class IntegerPlatfromClass {
     adjustSpacing(str) {
         //str = .num OR .term ONLY
         var size;
-        if (str == ".num") size = 8
-        else if (str == ".term") size = 18
+        if (str == ".num") size = 60
+        else if (str == ".term") size = 180
         else return
 
         const list = document.querySelectorAll(str); 
         list.forEach(el => {
           const n = el.children.length;
           (el as HTMLElement).style.setProperty('--total', n.toString());
-          (el as HTMLElement).style.setProperty('--boxSize', (size).toString() +"vh");
+          (el as HTMLElement).style.setProperty('--boxSize', (size).toString() +"px");
         });
     }
     
