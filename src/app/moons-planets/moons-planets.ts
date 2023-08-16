@@ -110,7 +110,7 @@ export class MoonsPlanetsAPI {
         var retryBtn = document.createElementNS(svgns,"use")
         this.controls.appendChild(retryBtn)
         retryBtn.setAttribute("href","#retry-btn")
-        gsap.set(retryBtn, {x : 10, y : 10, transformOrigin : "35px 35px", scale : 0})
+        gsap.set(retryBtn, {x : 10, y : 10, transformOrigin : "35px 35px", scale : 0, visibility : "hidden"})
 
         // retryBtn.onpointerdown = function(e) {
         //     self.reset()
@@ -155,7 +155,9 @@ export class MoonsPlanetsAPI {
         playBtn.addEventListener('click', function() {
             self.game.attempts++;
             self.canEdit = false
-            self.tl.to(playBtn, {duration : 0.2, scale : 0})
+            self.tl.to(playBtn, {duration : 0.2, scale : 0, onComplete : function() {
+                gsap.set(playBtn, {visibility : "hidden"})
+            }})
             self.playAnimation()
 
         })
@@ -499,15 +501,19 @@ export class MoonsPlanetsAPI {
 
         //show retry and/or next button 
         if (this.game.attempts > 2) {
-            gsap.set(self.retryBtn, {scale : 0, x : 10, y : 10, rotation : 0})
-            this.tl.to([self.retryBtn, self.nextBtn], {scale : 1, rotation : 0})
+            gsap.set(self.retryBtn, {scale : 0, visibility : "hidden", x : 10, y : 10, rotation : 0})
+            this.tl.to([self.retryBtn, self.nextBtn], {scale : 1, rotation : 0, onStart : function() {
+                gsap.set(self.retryBtn, {visibility : "visible"})
+            }})
         }
         else {
            gsap.set(self.nextBtn,{duration: 0, scale: 0})
             
            //rotatating retry in middle
-           gsap.set(self.retryBtn, {scale : 0, x : 610, y : 320, rotation : 0})
-           this.tl.to(self.retryBtn, {scale : 3, duration : 1})
+           gsap.set(self.retryBtn, {scale : 0, visibility : "hidden", x : 610, y : 320, rotation : 0})
+           this.tl.to(self.retryBtn, {scale : 3, duration : 1, onStart : function() {
+                gsap.set(self.retryBtn, {visibility : "visible"})
+            }})
            this.tl.to(self.retryBtn, {repeat : -1, duration : 4, rotation : 360, ease: "bounce"}) 
         }
 
@@ -650,8 +656,8 @@ export class MoonsPlanetsAPI {
         this.setupPlanets()
 
         //reset buttons
-        gsap.set(self.playBtn, {scale : 1})
-        gsap.set(self.retryBtn, {scale : 0, rotation : 0, duration : 0})
+        gsap.set(self.playBtn, {scale : 1, visibility : "visible"})
+        gsap.set(self.retryBtn, {scale : 0, rotation : 0, duration : 0, visibility : "hidden"})
         
         if (self.game.attempts > 2)
             gsap.set(self.nextBtn, {scale : 1})
