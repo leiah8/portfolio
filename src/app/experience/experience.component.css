@@ -242,6 +242,8 @@ li {
 
     /* drop down*/
 
+    /* drop down*/
+
     #dropdown {
     
         grid-template-columns : 60% 40%;
@@ -254,8 +256,8 @@ li {
 
     .dropbtn {
         width : 85%;
-        height : 5vh;
-    }
+        /* height : 35px; */
+        height : max(35px, 40%)    }
 
     #dropbtns {
         padding-bottom : 20px;
@@ -263,30 +265,26 @@ li {
         margin-right : 0;
     
         display : grid;
-        /* grid-template-rows: 3fr 3fr 3fr; */
-        grid-template-rows : 10vh 10vh 10vh;
-        align-items : center;
+        grid-template-rows: 3fr 3fr 3fr;
+
     }
 
 
     .options {
         list-style: none;
-        margin-top: 3vh;
+        /* margin-top: 20%; */
+        margin-top : 25px;
 
         padding-left : 10px;
-
-        display : grid;
-        /* grid-template-rows: 3fr 3fr 3fr; */
-        grid-template-rows : 10vh 10vh 10vh;
-        align-items : center;
     }
     
     .options>li {
-        /* margin-bottom: 5vh; */
+        margin-bottom: 30%;
         
         font-size: 22px;
         color: #196769;
     }
+    
 
 
 
