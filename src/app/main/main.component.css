@@ -373,7 +373,9 @@ button:hover {
     .column {
         grid-template-rows : 1fr;
         grid-template-columns : 3fr 3fr 3fr;
-        padding-bottom : 10px
+        padding-bottom : 10px;
+
+        justify-items: center;
     } 
     
     /* drop down*/
@@ -390,7 +392,8 @@ button:hover {
 
     .dropbtn {
         width : 85%;
-        height : 35px;
+        /* height : 35px; */
+        height : max(35px, 40%)
     }
 
     #dropbtns {
@@ -400,22 +403,22 @@ button:hover {
     
         display : grid;
         grid-template-rows: 3fr 3fr 3fr;
+
     }
 
 
     .options {
         list-style: none;
-        margin-top: 20%;
+        /* margin-top: 20%; */
+        margin-top : 25px;
 
         padding-left : 10px;
     }
     
     .options>li {
-        margin-bottom: 26%;
+        margin-bottom: 30%;
         
         font-size: 22px;
         color: #196769;
     }
-    
-    
 }
