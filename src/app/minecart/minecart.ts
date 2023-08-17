@@ -247,11 +247,11 @@ export class IntegerPlatfromClass {
       var self = this
 
       //next btn
-      gsap.set(self.retryBtn, {scale: 0})
+      gsap.set(self.retryBtn, {scale: 0, visibility : "hidden"})
       if (self.game.attempts > 2 || self.game.completed) 
-        self.tl.to(self.nextBtn,{duration: 1,scale: 1,ease: "elastic"})
+        self.tl.to(self.nextBtn,{duration: 1, scale: 1, ease: "elastic", onStart : function() {gsap.set(self.nextBtn, {visibility : "visible"})}})
       else 
-        gsap.set(self.nextBtn,{scale: 0})
+        gsap.set(self.nextBtn,{scale: 0, visibility : "hidden"})
       
       //ground
       gsap.set(self.left, {y : 400 + -self.game.start*50 - 28})
@@ -377,7 +377,7 @@ export class IntegerPlatfromClass {
               self.canReset = false
               self.canPlay = false
 
-              self.tl.to(self.playBtn, {duration : 0.2, scale : 0})
+              self.tl.to(self.playBtn, {duration : 0.2, scale : 0, onComplete : function() {gsap.set(self.playBtn, {visibility : "hidden"})}})
               self.closeInput()
               self.playAnimation()
             }
@@ -388,7 +388,7 @@ export class IntegerPlatfromClass {
         this.controls.appendChild(retryBtn)
         retryBtn.setAttribute("href","#retryBtn")
         gsap.set(retryBtn, {x : 10, y : 10})
-        gsap.set(retryBtn, {transformOrigin : "35px 35px"})
+        gsap.set(retryBtn, {transformOrigin : "35px 35px", visibility : "hidden"})
         this.retryBtn = retryBtn
 
         retryBtn.onpointerdown = function() {
@@ -425,7 +425,7 @@ export class IntegerPlatfromClass {
         this.controls.appendChild(nextBtn)
         nextBtn.setAttribute("href","#nextBtn")
         gsap.set(nextBtn, {x : 1180, y : 10})
-        gsap.set(nextBtn, {transformOrigin : "35px 35px"})
+        gsap.set(nextBtn, {transformOrigin : "35px 35px", visibility : "hidden"})
         this.nextBtn = nextBtn
 
         nextBtn.onpointerdown = function(e) { self.nextGame() }
@@ -507,8 +507,8 @@ export class IntegerPlatfromClass {
       this.tl.clear()
 
       //buttons
-      gsap.set(self.retryBtn, {scale: 0})
-      gsap.set(self.playBtn, {scale : 1})
+      gsap.set(self.retryBtn, {scale: 0, visibility : "hidden"})
+      gsap.set(self.playBtn, {scale : 1, visibility : "visible"})
       
       //platform
       this.sum = 0
@@ -719,15 +719,17 @@ export class IntegerPlatfromClass {
         //next and retry buttons
         if (self.game.attempts > 2 || self.game.completed) {
           gsap.set(self.retryBtn, {transformOrigin : "35px 35px"})
-          gsap.set(self.retryBtn, {x : 10, y : 10, scale : 0, rotation : 0})
-          self.tl.to([self.nextBtn, self.retryBtn],{duration: 1, scale: 1, ease: "elastic"})
+          gsap.set(self.retryBtn, {x : 10, y : 10, scale : 0, rotation : 0, visibility : "visible"})
+          self.tl.to([self.nextBtn, self.retryBtn],{duration: 1, scale: 1, ease: "elastic", 
+            onStart : function() {gsap.set([self.nextBtn, self.retryBtn], {visibility : "visible"})}
+          })
         }
         else {
           self.tl.to(self.nextBtn,{duration: 0, scale: 0})
           
           //rotating retry button
           gsap.set(self.retryBtn, {transformOrigin : "35px 35px"})
-          self.tl.to(self.retryBtn, {duration : 0, scale : 0, x : 610, y : 320, rotation : 0})
+          self.tl.to(self.retryBtn, {duration : 0, scale : 0, x : 610, y : 320, rotation : 0, visibility : "visible"})
           self.tl.to(self.retryBtn, {duration: 1, scale: 3}) 
           self.tl.to(self.retryBtn, {repeat : -1, duration : 4, rotation : 360, ease: "bounce"}) 
         }
