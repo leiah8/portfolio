@@ -60,11 +60,11 @@ export class MaterialBridgeAPI {
     currentImg: SVGUseElement
     inputSize: HTMLSelectElement;
     inputPieces: HTMLInputElement;
+    inputText : HTMLElement;
     retryBtn: HTMLElement;
     nextBtn: HTMLElement;
     boat: HTMLElement;
 
-    // usability : HTMLElement;
 
     frontWater: HTMLElement;
     lightning: HTMLElement;
@@ -99,10 +99,16 @@ export class MaterialBridgeAPI {
     tl: any
     tl2: any[]
     pointer: SVGUseElement;
-    helpBtn : HTMLElement;
-    help : boolean;
+    // helpBtn : HTMLElement;
+    // help : boolean;
     canOrder : boolean;
     popup : SVGUseElement;
+    popuptext : SVGUseElement;
+
+    tools : SVGUseElement;
+
+    overlay: HTMLElement;
+
 
     constructor(setup, games) {
         this.arena = setup.arena
@@ -114,6 +120,7 @@ export class MaterialBridgeAPI {
         this.inputImg = setup.inputImg
         this.inputSize = setup.inputSize
         this.inputPieces = setup.inputPieces
+        this.inputText = setup.inputText
         this.orderBtn = setup.orderBtn
         this.boat = setup.boat
         this.frontWater = setup.frontWater
@@ -135,12 +142,12 @@ export class MaterialBridgeAPI {
 
         this.fallingBlocks = []
 
-        // this.usability = setup.usability
-        this.helpBtn = setup.helpBtn
-        this.help = setup.help
+       
+        // this.help = setup.help
 
         this.canOrder = true
 
+        this.overlay = setup.overlay
 
         this.init()
 
@@ -160,7 +167,13 @@ export class MaterialBridgeAPI {
         this.smallBoat = document.createElementNS(svgns, "use")
         this.smallBoat.setAttribute("href", "#smallBoat")
         this.arena.appendChild(this.smallBoat)
-        gsap.set(this.smallBoat, { x: -400, y: this.boatY + 78 })
+        gsap.set(this.smallBoat, { x: -400, y: this.boatY + 152 })
+
+        this.tools = document.createElementNS(svgns, "use")
+        this.tools.setAttribute("href", "#tools")
+        this.arena.appendChild(this.tools)
+        gsap.set(this.tools, { transformOrigin : "57.5px 150px", scale : 0})
+        gsap.set(this.tools, { x: 40, y: this.boatY + 78})
 
         //create boat
         this.bigBoat = document.createElementNS(svgns, "use")
@@ -180,11 +193,7 @@ export class MaterialBridgeAPI {
         this.setupTargets()
         this.setupButtons()
 
-        // if(this.help)
-        //     this.setupUsability()
-        // else
-        //     gsap.set([this.usability, this.helpBtn], {visibility : "hidden"})
-
+        
         this.startAnimation();
     }
 
@@ -193,7 +202,6 @@ export class MaterialBridgeAPI {
     }
 
     setBridge() {
-        //to do : light up bridge as small boat comes in
         if (this.game.bridgeArr.length == 1) {
             this.bridge.setAttribute("href", "#bridge1")
             gsap.set(this.bridge, { x: -1, y: 100 })
@@ -386,26 +394,26 @@ export class MaterialBridgeAPI {
     //setup the input 
     setupInput() {
         var self = this
-        gsap.set(this.input, { x: "32vh", y: "70vh" }) //to do??
+        // gsap.set(this.input, { x: "30%", y: "100%" }) 
+        //gsap.set(this.input, { x: "39vh", y: "70vh" }) //to do: FIX
 
         this.currentImg = document.createElementNS(svgns, "use")
         this.inputImg.appendChild(this.currentImg)
         this.currentImg.setAttribute("href", "#one")
-        gsap.set(this.currentImg, { x: 0, y: "1vh" })
+        // gsap.set(this.currentImg, { x: 0, y: "5vh" })
+        gsap.set(this.currentImg, { x: 0, y: "30px" })
 
         this.popup = document.createElementNS(svgns, "use")
         this.inputImg.appendChild(this.popup)
         this.popup.setAttribute("href", "#outOfStockPopUp")
-        gsap.set(this.popup, {x : "94.6vh", y : "0.4vh", visibility:"hidden"})
+        // gsap.set(this.popup, {x : "1875%", y : "25%", visibility:"hidden"})
+        gsap.set(this.popup, {x : "460px", y : "0", visibility:"hidden"}) //to do: FIX
 
-        // var popuptext = document.createElementNS(svgns, "use")
-        // this.inputImg.appendChild(popuptext)
-        // popuptext.setAttribute("href", "#popuptext")
-        // gsap.set(popuptext, {x : "80vh", y : "-10vh", visibility:"visible"})
+     
 
-        this.popup.onpointerdown = function() {
-            window.alert("This piece is out of stock")
-        }
+        // this.orderBtn.onpointerdown = function() {
+        //     window.alert("This piece is out of stock")
+        // }
 
         this.setupSizes()
 
@@ -414,40 +422,74 @@ export class MaterialBridgeAPI {
             var val = Number(self.inputSize.value)
             self.changeSizeImg(val)
             self.checkStock()
+            
         }
 
         this.inputPieces.onchange = function() {
             self.checkStock()
         }
 
+        this.popuptext = document.createElementNS(svgns, "use")
+        this.frontWater.appendChild(this.popuptext)
+        this.popuptext.setAttribute("href", "#popuptext")
+        gsap.set(this.popuptext, {x : "515", y : "370", visibility:"hidden"})
+
+        this. popuptext.onpointerdown = function() {
+            gsap.set(self.popuptext, {visibility : "hidden"})
+        }
+
         this.orderBtn.onpointerdown = function (e) {
             if (!self.finishedAttempt && self.canOrder) {
                 self.order = { num: 0, size: Number(self.inputSize.value), pieces: Number(self.inputPieces.value) }
+                gsap.set(self.popuptext, {visibility : "hidden"})
                 self.playAnimation()
+            }
+            else if (!self.canOrder) {
+                // window.alert("This piece is out of stock")
+                gsap.set(self.popuptext, {visibility : "visible"})
+
             }
 
         }
     }
 
     changeSizeImg(val) {
-        if (val == 1)
+        if (val == 1) {
             this.currentImg.setAttribute("href", "#one")
-        else if (val == 0.5)
+            this.inputText.textContent = "One Whole"
+        }
+        else if (val == 0.5) {
             this.currentImg.setAttribute("href", "#half")
-        else if (val == 0.33333)
+            this.inputText.textContent = "One Half"
+        }
+        else if (val == 0.33333) {
             this.currentImg.setAttribute("href", "#third")
-        else if (val == 0.25)
+            this.inputText.textContent = "One Third"
+        }
+        else if (val == 0.25) {
             this.currentImg.setAttribute("href", "#fourth")
-        else if (val == 0.2)
+            this.inputText.textContent = "One Fourth"
+        }
+        else if (val == 0.2) {
             this.currentImg.setAttribute("href", "#fifth")
-        else if (val == 0.16667)
+            this.inputText.textContent = "One Fifth"
+        }
+        else if (val == 0.16667) {
             this.currentImg.setAttribute("href", "#sixth")
-        else if (val == 0.14286)
+            this.inputText.textContent = "One Sixth"
+        }
+        else if (val == 0.14286) {
             this.currentImg.setAttribute("href", "#seventh")
-        else if (val == 0.125)
+            this.inputText.textContent = "One Seventh"
+        }
+        else if (val == 0.125) {
             this.currentImg.setAttribute("href", "#eighth")
-        else if (val == 0.11111)
+            this.inputText.textContent = "One Eighth"
+        }
+        else if (val == 0.11111) {
             this.currentImg.setAttribute("href", "#ninth")
+            this.inputText.textContent = "One Ninth"
+        }
 
     }
 
@@ -457,11 +499,7 @@ export class MaterialBridgeAPI {
         //sizes
 
 
-        //remove all current options (to do)
-        // for(var i = 0; i < this.inputSize.options.length; i++) {
-        //     this.inputSize.remove(i)
-        // }
-        // console.log(this.inputSize.options)
+        
         this.inputSize.innerHTML = "";
         
         for(var i = this.game.fractionRange[0]; i <= this.game.fractionRange[1]; i++) {
@@ -500,11 +538,15 @@ export class MaterialBridgeAPI {
             gsap.set(this.orderBtn, {backgroundColor : "#aaaaaa", borderColor : "#aaaaaa"})
             this.canOrder = false
             gsap.set(this.popup, {visibility:"visible"})
+
+            if (!(this.inputText.textContent.slice(-1) == ")"))
+                this.inputText.textContent += " (Out of Stock)"
         }
         else {
             gsap.set(this.orderBtn, {backgroundColor : "#22c060", borderColor : "#22c060"})
             this.canOrder = true
             gsap.set(this.popup, {visibility:"hidden"})
+            gsap.set(this.popuptext, {visibility : "hidden"})
         }
 
     }
@@ -551,7 +593,6 @@ export class MaterialBridgeAPI {
             if (xVal + this.wholeSize * size * startScale > ogX + this.wholeSize * startScale + 1) {
                 xVal = ogX
                 yVal -= this.height * startScale
-                //ceneter the past row (TO DO)
             }
 
             var rect = document.createElementNS(svgns, "rect")
@@ -573,12 +614,13 @@ export class MaterialBridgeAPI {
 
 
         gsap.set(this.boat, { x: "-=" + (1300) })
+        this.tl.to(this.tools, { scale : 0, duration : 0.2 })
+        this.tl.to(this.tools, {duration : 0.2 })
         this.tl.to(this.smallBoat, { x: "+= " + 1300, duration: 3, ease: "linear" })
         this.tl.to([this.boat, this.bigBoat], { x: "+=" + 1300, duration: 3, ease: "linear" }, "<1")
         this.tl.to(this.boat, { duration: 1 })
 
 
-        //put in from left to right (TO DO)
         if (this.spaces.length > 0) {
             var finalBlock = blocks.length - 1
             var complete = false
@@ -876,27 +918,33 @@ export class MaterialBridgeAPI {
     }
 
     showEndGameButtons() {
+        var self = this
         //show buttons
         if (this.game.complete || this.game.attempts >= 3) {
-            this.tl.to(this.retryBtn, { scale: 0, x: "0vh", y: "0vh", rotation: 0, duration: 0 })
+            this.tl.to(this.retryBtn, { scale: 0, x: "0", y: "0", rotation: 0, duration: 0, onComplete : function() {
+                gsap.set([self.retryBtn, self.nextBtn], {visibility : "visible"})
+            } })
             this.tl.to([this.retryBtn, this.nextBtn], { scale: 1 })
         }
         else {
             //show rotating retry button in the middle
-            gsap.set(this.retryBtn, { scale: 0, x: "80vh", y: "50vh", rotation: 0 })
-            this.tl.to(this.retryBtn, { scale: 3, duration: 1 })
+            // gsap.set(this.retryBtn, { scale: 0, x: "80vh", y: "50vh", rotation: 0 })
+            gsap.set(this.retryBtn, { scale: 0, x: "565px", y: "300px", rotation: 0})
+            this.tl.to(this.retryBtn, { scale: 3, duration: 1, onStart : function() {
+                gsap.set(self.retryBtn, {visibility : "visible"})
+            } })
             this.tl.to(this.retryBtn, { repeat: -1, duration: 4, rotation: 360, ease: "bounce" })
         }
     }
 
     setupButtons() {
         var self = this
-        gsap.set(this.retryBtn, { scale: 0 })
+        gsap.set(this.retryBtn, { scale: 0, visibility : "hidden"})
 
         this.retryBtn.onpointerdown = function () {
             self.reset()
         }
-        gsap.set(this.nextBtn, { scale: 0 })
+        gsap.set(this.nextBtn, { scale: 0, visibility : "hidden"})
         this.nextBtn.onpointerdown = function () {
             self.nextGame()
         }
@@ -907,6 +955,20 @@ export class MaterialBridgeAPI {
                 self.checkStock()
             }
         }
+
+        //same as above
+        this.tools.onpointerdown = function () {
+            if (!self.finishedAttempt) {
+                gsap.set(self.input, { visibility: "visible" })
+                self.checkStock()
+            }
+        }
+
+        addEventListener('resize', e => {
+            this.onResize();
+        });
+
+        this.onResize();
     }
 
     startAnimation() {
@@ -951,10 +1013,13 @@ export class MaterialBridgeAPI {
             }
         })
 
+        this.tl.to(this.tools, { transformOrigin : "50% 100%", scale : 0, duration : 0})
         this.tl.to(this.fallingBlocks, { x: "+=" + 1300, duration: 5.5, ease: "linear" })
 
         //move in little boat 
-        this.tl.to(this.smallBoat, { x: 30, duration: 2, ease: "linear"}, "<4")
+        this.tl.to(this.smallBoat, { x: 53, duration: 2, ease: "linear"}, "<4")
+        this.tl.to(this.smallBoat, {duration: 0.4})
+        this.tl.to(this.tools, {scale : 1, ease : "elastic", duration : 1.2})
 
     }
 
@@ -974,12 +1039,12 @@ export class MaterialBridgeAPI {
         });
         this.animationEls = [] // remove all elements 
 
-        gsap.set(this.retryBtn, { scale: 0 })
+        gsap.set(this.retryBtn, { scale: 0, visibility : "hidden"})
 
         if (this.game.complete || this.game.attempts >= 3)
-            gsap.set(this.nextBtn, { scale: 1 })
+            gsap.set(this.nextBtn, { scale: 1, visibility : "visible"})
         else
-            gsap.set(this.nextBtn, { scale: 0 })
+            gsap.set(this.nextBtn, { scale: 0, visibility : "hidden"})
 
         this.setupSpaces();
 
@@ -989,6 +1054,20 @@ export class MaterialBridgeAPI {
 
     nextGame() {
         var self = this
+
+        //remove fallen blocks 
+        this.fallingBlocks.forEach(b => {
+            self.boat.removeChild(b)
+        });
+        this.fallingBlocks = []
+
+        //reset fallen block timelines
+        this.tl2.forEach(el => {
+            el.t.clear()
+        });
+        this.tl2 = []
+
+
         this.gameIndex = (this.gameIndex + 1) % this.games.length
         this.game = this.games[this.gameIndex]
 
@@ -1030,7 +1109,7 @@ export class MaterialBridgeAPI {
 
     // pointTo(x, y, el) {
     //     var self = this
-    //     gsap.set(this.usability, {visibility : "visible"})
+    //     // gsap.set(this.usability, {visibility : "visible"})
 
     //     this.tl.pause()
     //     var tempT = gsap.timeline() 
@@ -1068,4 +1147,12 @@ export class MaterialBridgeAPI {
 
 
     // }
+
+    onResize() {
+        const currentPuzzleWidth = this.svg.getBoundingClientRect().width;
+        const curScale = currentPuzzleWidth / 1280;
+        this.overlay.style.scale = curScale.toString();
+        this.overlay.style.width = `${(currentPuzzleWidth * (1 / curScale))}px`;
+    }
+
 }
