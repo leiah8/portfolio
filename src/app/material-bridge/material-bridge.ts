@@ -173,6 +173,7 @@ export class MaterialBridgeAPI {
         this.tools.setAttribute("href", "#tools")
         this.arena.appendChild(this.tools)
         gsap.set(this.tools, { transformOrigin : "57.5px 150px", scale : 0})
+        
         gsap.set(this.tools, { x: 40, y: this.boatY + 78})
 
         //create boat
