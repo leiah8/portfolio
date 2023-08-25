@@ -37,7 +37,7 @@ export class MainAPI {
     jobP : HTMLElement
     jobDate : HTMLElement
 
-    job1Title : string = "Knowledgehook - Gamified Education Content Developer";
+    job1Title : string = "Knowledgehook -  Software Engineering Intern";
     job2Title : string = "Knowledgehook - Content Engineer Assistant";
     job3Title : string = "Hatch Coding - Coding Coach";
 
@@ -45,20 +45,20 @@ export class MainAPI {
     jobDate2 : string = "May 2022 - August 2022"
     jobDate3 : string = "March 2021 - August 2021"
 
-    job1P : string = "<li> Developed four mini-games in Angular using Typescript, HTML and CSS </li>" +
-        "<li> Designed adaptable games that can be utilized by multiple grade levels </li>" +
-        "<li> Conducted testing and quality assurance, including numerous usability testing sessions with colleagues </li>" +
-        "<li> Utilized Socket.io to develop the base server-client architecture for a multiplayer game </li>" +
+    job1P : string = "<li> Developed four interactive games in Angular using Typescript, HTML and CSS </li>" +
+    "<li> Utilized Socket.io to develop the base server-client architecture for a multiplayer game </li>" +
+        "<li> Designed adaptable APIs that can be utilized by other developers and those without coding experience </li>" +
+        "<li> Conducted quality assurance and testing, including usability testing sessions with colleagues </li>" +
         "<li> Leveraged GitHub to effectively synchronize and co-develop software projects with other engineers </li>"
     
     
     job2P : string = "<li> Developed twelve interactive math tools using Angular that have been used by students globally </li>" +
         "<li> Proposed alternative technical solutions to overcome design constraints and increase adaptability </li>" +
-        "<li> Collaborated with educators and fellow developers to design interactive math questions for students of varying levels and ages </li>" +
-        "<li> Tested and conducted QA to create detailed bug tickets for projects developed by myself and coworkers </li>"
+        "<li> Collaborated with fellow software engineers to design interactives </li>" +
+        "<li> Created detailed bug tickets for various projects after performing quality assurance </li>"
     
-    job3P : string = "<li> Taught children of various ages, in both teams and one-on-one situations, coding principles in JavaScript and Python </li>" + 
-        "<li> Discovered and debugged numerous problems in students’ projects, often analyzing over a thousand lines of code </li>" 
+    job3P : string = "<li> Taught students, of various levels, coding principles in JavaScript and Python </li>" + 
+        "<li> Debugged issues in students’ projects, often analyzing over a thousand lines of code </li>" 
 
     constructor(setup : MainSetup) {
         var self = this
@@ -113,7 +113,7 @@ export class MainAPI {
         var tl = gsap.timeline()
         var time = 0.3
 
-        this.jobBtn1.innerHTML = "<p>Knowledgehook <br> Gamified Education Content Developer</p>" //self.job1Title
+        this.jobBtn1.innerHTML = "<p>Knowledgehook <br> Software Engineering Intern</p>" //self.job1Title
         this.jobBtn1.onpointerdown = function() {
             tl.clear()
             tl.to([self.jobTitle, self.jobP, self.jobDate], {opacity : 0, duration : time, onComplete : function() {
