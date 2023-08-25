@@ -14,10 +14,22 @@ export class ResumeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // if(navigator.userAgent.indexOf('Safari') != - 1 && navigator.userAgent.indexOf('Chrome') == -1) {
-    //   //window.open("/assets/LeiahNayResume.pdf")
-    //   //window.location.href = "assets/LeiahNayResume.pdf";
-    // }
+    var notSafari = document.getElementById("not-safari");
+    var safari = document.getElementById("safari");
+
+    if(navigator.userAgent.indexOf('Safari') != - 1 && navigator.userAgent.indexOf('Chrome') == -1) {
+      //window.open("/assets/LeiahNayResume.pdf")
+      //window.location.href = "assets/LeiahNayResume.pdf";
+
+      safari.setAttribute("visibility", "visible");
+      notSafari.setAttribute("visibility", "hidden");
+    } else {
+      safari.setAttribute("visibility", "hidden");
+      notSafari.setAttribute("visibility", "visible");
+
+    }
+
+
   }
 
 }
