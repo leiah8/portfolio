@@ -11,7 +11,7 @@ export class ResumeComponent implements AfterViewInit {
 
     if(navigator.userAgent.indexOf('Safari') != - 1 && navigator.userAgent.indexOf('Chrome') == -1) {
       //window.open("/assets/LeiahNayResume.pdf")
-      window.location.href = "/assets/LeiahNayResume.pdf";
+      window.location.href = "assets/LeiahNayResume.pdf";
     }
 
   }
