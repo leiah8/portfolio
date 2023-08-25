@@ -8,15 +8,16 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 export class ResumeComponent implements AfterViewInit {
 
   constructor() { 
-
-    if(navigator.userAgent.indexOf('Safari') != - 1 && navigator.userAgent.indexOf('Chrome') == -1) {
-      //window.open("/assets/LeiahNayResume.pdf")
-      window.location.href = "https://leiah8.github.io/portfolio/assets/LeiahNayResume.pdf";
-    }
+    
 
   }
 
   ngAfterViewInit(): void {
+    
+    if(navigator.userAgent.indexOf('Safari') != - 1 && navigator.userAgent.indexOf('Chrome') == -1) {
+      //window.open("/assets/LeiahNayResume.pdf")
+      window.location.href = "assets/LeiahNayResume.pdf";
+    }
   }
 
 }
