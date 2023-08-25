@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { gsap } from "gsap/all";
 
 @Component({
   selector: 'app-resume',
@@ -21,11 +22,10 @@ export class ResumeComponent implements OnInit {
       //window.open("/assets/LeiahNayResume.pdf")
       //window.location.href = "assets/LeiahNayResume.pdf";
 
-      safari.setAttribute("visibility", "visible");
-      notSafari.setAttribute("visibility", "hidden");
+      gsap.set(notSafari, {display : "none"});
     } else {
-      safari.setAttribute("visibility", "hidden");
-      notSafari.setAttribute("visibility", "visible");
+      
+      gsap.set(safari, {display : "none"});
 
     }
 
