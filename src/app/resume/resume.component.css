@@ -14,3 +14,10 @@ html {
 html::-webkit-scrollbar {
     display : none;
 }
+
+h3 {
+    font-family : 'Open Sans';
+    font-size : 100%;
+
+    text-align: center;
+}
