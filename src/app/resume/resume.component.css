@@ -3,3 +3,14 @@
     width : 100%;
 }
 /* to do : get rid of side scrollbar */
+
+html {
+    overflow-y : hidden;
+    overflow-x : hidden;
+
+    scrollbar-width : none;
+}
+
+html::-webkit-scrollbar {
+    display : none;
+}
