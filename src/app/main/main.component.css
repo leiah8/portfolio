@@ -178,12 +178,19 @@ button:hover {
     place-content : center
 }
 
+.square {
+    display : grid;
+    grid-template-columns : 1fr;
+    grid-template-rows : 4fr 4fr 4fr 4fr;
+    place-content : center
+}
+
 .job {
     /* width : min(20vw, 350px);  */
     width : 80%;
     /* height : max(15vh, fit-content); */
-    height : 15vh;
-    border-radius : 2vw;
+    height : 12vh;
+    border-radius : 1vw;
 
     margin : 10px;
 }
@@ -357,12 +364,12 @@ button:hover {
     }
 
     .job {
-        width : 25vw;
+        width : 90%;
         /* height : max(15vh, fit-content); */
         height : 100%;
         margin : 5px;
 
-        font-size : 2.2vw
+        font-size : 2.5vw
     }
    
     .experience {
@@ -377,6 +384,15 @@ button:hover {
 
         justify-items: center;
     } 
+
+    .square {
+        grid-template-rows : 2fr 2fr;
+        grid-template-columns : 2fr 2fr;
+        grid-gap : 5px;
+        padding-bottom : 10px;
+
+        justify-items: center;
+    }
     
     /* drop down*/
 
